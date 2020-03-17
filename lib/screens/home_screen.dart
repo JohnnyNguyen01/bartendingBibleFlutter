@@ -59,11 +59,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40)),
                     child: Container(
-                      padding: EdgeInsets.only(left:10),
+                      padding: EdgeInsets.only(left: 10),
                       width: 300,
                       child: TextField(
                         decoration: InputDecoration(
-                          icon: Icon(Icons.search),
+                            icon: Icon(Icons.search),
                             border: InputBorder.none,
                             hintText: 'Find Cocktail'),
                       ),
@@ -72,6 +72,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+            SizedBox(height: 40),
+            //Container(color: Colors.red, child: Text('HELP')),
+
+            Container(
+              height: 180,
+              width: 380,
+              child: Card(
+                elevation: 13,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                        child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          //alignment: Alignment.topCenter,
+                          image: AssetImage(
+                              'lib/images/Spencer-Davis-unsplash.jpg'),
+                        ),
+                      ),
+                    )),
+                    Container(
+                        height: 35,
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('TITLE'),
+                            Text('SHOW ALL'),
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
