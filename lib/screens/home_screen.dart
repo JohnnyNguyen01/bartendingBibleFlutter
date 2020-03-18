@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:bartender_bible/Components/home_page_button.dart';
+import 'package:bartender_bible/Components/rounded_search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -52,70 +54,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       )),
                 ),
                 //Search bar card
-                Positioned(
-                  bottom: -35,
-                  left: 50,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40)),
-                    child: Container(
-                      padding: EdgeInsets.only(left: 10),
-                      width: 300,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            icon: Icon(Icons.search),
-                            border: InputBorder.none,
-                            hintText: 'Find Cocktail'),
-                      ),
-                    ),
-                  ),
-                ),
+                RoundedSearchBar(),
               ],
             ),
             SizedBox(height: 50),
-            //Container(color: Colors.red, child: Text('HELP')),
-
-            Container(
-              height: 180,
-              width: 380,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                elevation: 13,
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                        child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            //alignment: Alignment.topCenter,
-                            image: AssetImage(
-                                'lib/images/Spencer-Davis-unsplash.jpg'),
-                          ),
-                        ),
-                      ),
-                    )),
-                    Container(
-                        height: 35,
-                        padding: EdgeInsets.only(left: 10, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text('TITLE'),
-                            Text('SHOW ALL'),
-                          ],
-                        )),
-                  ],
-                ),
-              ),
-            )
+            HomePageButton(
+                title: 'Favourites',
+                image: AssetImage('lib/images/Spencer-Davis-unsplash.jpg')),
           ],
         ),
       ),
