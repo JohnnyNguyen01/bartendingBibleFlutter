@@ -57,10 +57,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 RoundedSearchBar(),
               ],
             ),
-            SizedBox(height: 50),
-            HomePageButton(
-                title: 'Favourites',
-                image: AssetImage('lib/images/Spencer-Davis-unsplash.jpg')),
+            SizedBox(height: 39),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.only(left: 8, right: 8),
+                children: <Widget>[
+                  HomePageButton(
+                      title: 'Favourites',
+                      image:
+                          AssetImage('lib/images/Spencer-Davis-unsplash.jpg')),
+                  SizedBox(height: 15),
+                  HomePageButton(
+                      title: 'Classic Cocktails',
+                      image:
+                          AssetImage('lib/images/hessam-hojati-unsplash.jpg')),
+                  SizedBox(height: 15),
+                  HomePageButton(
+                      title: 'Cocktails By Alcohol',
+                      image:
+                          AssetImage('lib/images/john-cafazza-unsplash.jpg')),
+                  SizedBox(height: 15),
+                  HomePageButton(
+                      title: 'All Cocktails',
+                      image:
+                          AssetImage('lib/images/johann-trasch-unsplash.jpg')),
+                ],
+              ),
+            ),
           ],
         ),
       ),
