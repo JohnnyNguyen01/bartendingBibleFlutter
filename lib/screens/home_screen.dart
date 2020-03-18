@@ -72,24 +72,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 50),
             //Container(color: Colors.red, child: Text('HELP')),
 
             Container(
               height: 180,
               width: 380,
               child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 elevation: 13,
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                        child: Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          //alignment: Alignment.topCenter,
-                          image: AssetImage(
-                              'lib/images/Spencer-Davis-unsplash.jpg'),
+                        child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            //alignment: Alignment.topCenter,
+                            image: AssetImage(
+                                'lib/images/Spencer-Davis-unsplash.jpg'),
+                          ),
                         ),
                       ),
                     )),
