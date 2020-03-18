@@ -12,7 +12,7 @@ class _RoundedSearchBarState extends State<RoundedSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: -35,
+      bottom: -28,
       left: 50,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),

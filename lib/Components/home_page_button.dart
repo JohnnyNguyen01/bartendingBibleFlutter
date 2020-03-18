@@ -4,11 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 class HomePageButton extends StatelessWidget {
   final String title;
   final ImageProvider image;
+  final Function onTapFunction;
 
   final TextStyle showAllBtnStyle =
       GoogleFonts.montserrat(textStyle: TextStyle(color: Colors.orange));
 
-  HomePageButton({this.title, this.image});
+  HomePageButton({this.title, this.image, this.onTapFunction});
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +60,7 @@ class HomePageButton extends StatelessWidget {
           ),
         ),
       ),
+      onTap: onTapFunction,
     );
   }
 }

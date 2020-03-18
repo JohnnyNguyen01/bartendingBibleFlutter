@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bartender_bible/Components/home_page_button.dart';
 import 'package:bartender_bible/Components/rounded_search_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -44,13 +45,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: 40,
+                  bottom: 30,
                   left: 85,
                   child: Container(
+                      padding: EdgeInsets.all(5),
                       color: Colors.black,
                       child: Text(
                         'Cocktails at your fingertips',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: GoogleFonts.lato(
+                            textStyle:
+                                TextStyle(color: Colors.white, fontSize: 20)),
                       )),
                 ),
                 //Search bar card
@@ -68,9 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           AssetImage('lib/images/Spencer-Davis-unsplash.jpg')),
                   SizedBox(height: 15),
                   HomePageButton(
-                      title: 'Classic Cocktails',
-                      image:
-                          AssetImage('lib/images/hessam-hojati-unsplash.jpg')),
+                    title: 'Classic Cocktails',
+                    image: AssetImage('lib/images/hessam-hojati-unsplash.jpg'),
+                    onTapFunction: () {
+                      Navigator.pushNamed(context, '/ClassicCocktails');
+                    },
+                  ),
                   SizedBox(height: 15),
                   HomePageButton(
                       title: 'Cocktails By Alcohol',
