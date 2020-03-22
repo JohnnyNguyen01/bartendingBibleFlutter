@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/classic_cocktails_screen.dart';
+import 'screens/cocktails_by_alcohol.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomeScreen(),
         '/ClassicCocktails': (context) => ClassicsScreen(),
+        '/CocktailsByAlcohol': (context) => CocktailsByAlcohol(),
       },
     );
   }

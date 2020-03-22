@@ -80,14 +80,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(height: 15),
                   HomePageButton(
-                      title: 'Cocktails By Alcohol',
-                      image:
-                          AssetImage('lib/images/john-cafazza-unsplash.jpg')),
+                    title: 'Cocktails By Alcohol',
+                    image: AssetImage('lib/images/john-cafazza-unsplash.jpg'),
+                    onTapFunction: () {
+                      Navigator.pushNamed(context, '/CocktailsByAlcohol');
+                    },
+                  ),
                   SizedBox(height: 15),
                   HomePageButton(
-                      title: 'All Cocktails',
-                      image:
-                          AssetImage('lib/images/johann-trasch-unsplash.jpg')),
+                    title: 'All Cocktails',
+                    image: AssetImage('lib/images/johann-trasch-unsplash.jpg'),
+                    onTapFunction: () {},
+                  ),
                 ],
               ),
             ),
