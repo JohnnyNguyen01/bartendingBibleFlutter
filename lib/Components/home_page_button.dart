@@ -47,11 +47,11 @@ class HomePageButton extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         '$title'.toUpperCase(),
-                        style: showAllBtnStyle.copyWith(color: Colors.black),
+                        style: kShowAllBtnStyle.copyWith(color: Colors.black),
                       ),
                       Text(
                         'SHOW ALL',
-                        style: showAllBtnStyle,
+                        style: kShowAllBtnStyle,
                       ),
                     ],
                   )),

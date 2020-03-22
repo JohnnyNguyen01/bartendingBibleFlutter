@@ -8,6 +8,7 @@ class CocktailsByAlcohol extends StatefulWidget {
 }
 
 class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
+  ScrollController _scrollController = ScrollController();
   List<AlcoholType> _alcoholTypes = [
     AlcoholType(
         name: 'Vodka',
@@ -42,9 +43,13 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    //buildAlcoholTypeList();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+            print('end of scroll list');
+          }
+    });
   }
 
   @override
@@ -96,14 +101,22 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
           ),
           SizedBox(height: 15.0),
           ListView.builder(
-            shrinkWrap: true,
-            physics: ScrollPhysics(),
+            controller: _scrollController,
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
               itemCount: _alcoholTypes.length,
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(
                     onTap: () {},
-                    title: Text(_alcoholTypes[index].name),
+                    leading: CircleAvatar(
+                      backgroundImage: _alcoholTypes[index].getImage(),
+                      radius: 30.0,
+                    ),
+                    title: Text(_alcoholTypes[index].getName(),
+                        style: kShowAllBtnStyle),
+                    subtitle: Text(_alcoholTypes[index].getDescription()),
+                    isThreeLine: true,
                   ),
                 );
               }),
@@ -112,38 +125,4 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
     );
   }
 
-/*
-  //alcohol list types add
-  void buildAlcoholTypeList() {
-    _alcoholTypes.add(AlcoholType(
-        'Vodka',
-        'The clear odourless and tasteless liquor distilled from potatoes and grains.',
-        AssetImage('lib/images/alec-favale-vodka-unsplash.jpg')));
-
-    _alcoholTypes.add(AlcoholType(
-        'Gin',
-        'Hailing from Great Britain, produced from grain and flavoured by Juniper Berries.',
-        AssetImage('lib/images/bundo-kim-gin-unsplash.jpg')));
-
-    _alcoholTypes.add(AlcoholType(
-        'Rum',
-        'Originating from the Carribean, distilled from sugarcane and ages in barrels,',
-        AssetImage('lib/images/anders-nord-rum-unsplash.jpg')));
-
-    _alcoholTypes.add(AlcoholType(
-        'Tequila',
-        'A Mexican original utilising the flavourful Agave plant.',
-        AssetImage('lib/images/kevin-kelly-tequila-unsplash.jpg')));
-
-    _alcoholTypes.add(AlcoholType(
-        'Whisky',
-        'Grain mashed in oak barrels, believed to be first distilled by monks in 1405',
-        AssetImage('lib/images/brian-jones-whisky-unsplash.jpg')));
-
-    _alcoholTypes.add(AlcoholType(
-        'Brandy',
-        'You though wine was alcoholic? Age it in a barrel for a bit and BOOM. Brandy.',
-        AssetImage('lib/images/maria-das-dores-brandy-unsplash.jpg')));
-  }
-  */
 }
