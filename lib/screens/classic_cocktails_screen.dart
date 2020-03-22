@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bartender_bible/styles.dart';
+import 'package:bartender_bible/Util/styles.dart';
+import 'package:bartender_bible/Services/cocktaildb_api.dart';
 
 class ClassicsScreen extends StatefulWidget {
   @override
@@ -31,16 +32,30 @@ class _ClassicsScreenState extends State<ClassicsScreen> {
                 right: 80,
                 bottom: -23,
                 child: Card(
+                  elevation: 5.0,
                   child: Container(
                     height: 40,
                     child: Center(
-                      child: Text('Classic Cocktails', style: kCardHeading,),
+                      child: Text(
+                        'Classic Cocktails',
+                        style: kCardHeading,
+                      ),
                     ),
                   ),
                 ),
-              )
+              ),
+              //ListView.builder(itemBuilder: null),
             ],
           ),
+          SizedBox(height: 45.0),
+          FlatButton(
+              color: Colors.blue,
+              onPressed: () async {
+                CocktailDbAPI cdb = CocktailDbAPI();
+                var result = await cdb.getByName(name: 'margarita');
+                print(result);
+              },
+              child: Text('press me'))
         ],
       ),
     );

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:bartender_bible/Util/styles.dart';
 
 class HomePageButton extends StatelessWidget {
   final String title;
   final ImageProvider image;
   final Function onTapFunction;
 
-  final TextStyle showAllBtnStyle =
-      GoogleFonts.montserrat(textStyle: TextStyle(color: Colors.orange));
+  
 
   HomePageButton({this.title, this.image, this.onTapFunction});
 
