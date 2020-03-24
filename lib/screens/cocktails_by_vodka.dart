@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bartender_bible/Util/styles.dart';
 import 'package:bartender_bible/Services/cocktaildb_api.dart';
 import 'package:bartender_bible/Models/drink.dart';
+import 'package:bartender_bible/Components/single_drink_list_view.dart';
 
 class VodkaSelectionScreen extends StatefulWidget {
   @override
@@ -9,13 +10,13 @@ class VodkaSelectionScreen extends StatefulWidget {
 }
 
 class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
+  ScrollController _scrollController = ScrollController();
   List<Drink> drinkList = [];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    //makeMap();
+    makeMap();
   }
 
   @override
@@ -57,27 +58,27 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
               //ListView.builder(itemBuilder: null),
             ],
           ),
-          SizedBox(height: 15.0),
-          FlatButton(
-              color: Colors.blue,
-              onPressed: ()  {
-                makeMap();
-              },
-              child: Text('press me'))
+          SizedBox(height: 28.0),
+          //TODO : fix list loading issue
+          Expanded(
+            child: SingleDrinkLV(
+              scrollController: _scrollController,
+              drinkList: drinkList,
+            ),
+          ),
         ],
       ),
     );
   }
 
+  //Get search result, turn into list, convert all object from json List into Objects of drink in drinkLIST
   void makeMap() async {
     CocktailDbAPI cdb = CocktailDbAPI();
     var response = await cdb.getByAlcoholType(alcoholType: "Vodka");
     var result = response['drinks'] as List;
-    for(var jsonObject in result){
+    for (var jsonObject in result) {
       drinkList.add(Drink(jsonObject));
-      print(jsonObject['strDrink']);
     }
-    print(drinkList);
-    //print(result[0]['strDink']);
+    print('length is ${drinkList.length}');
   }
 }
