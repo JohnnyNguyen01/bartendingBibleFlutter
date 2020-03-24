@@ -5,8 +5,9 @@ class AlcoholType{
   String name;
   String description;
   ImageProvider image;
+  String route;
 
-  AlcoholType({this.name, this.description, this.image});
+  AlcoholType({this.name, this.description, this.image, this.route});
 
   String getName(){
     return name;

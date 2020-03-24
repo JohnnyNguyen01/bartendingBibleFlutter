@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/classic_cocktails_screen.dart';
 import 'screens/cocktails_by_alcohol.dart';
+import 'screens/cocktails_by_vodka.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => HomeScreen(),
         '/ClassicCocktails': (context) => ClassicsScreen(),
         '/CocktailsByAlcohol': (context) => CocktailsByAlcohol(),
+        '/VodkaCocktails': (context) => VodkaSelectionScreen(),
       },
     );
   }

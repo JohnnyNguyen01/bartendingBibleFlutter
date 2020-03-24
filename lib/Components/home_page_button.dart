@@ -6,16 +6,15 @@ class HomePageButton extends StatelessWidget {
   final ImageProvider image;
   final Function onTapFunction;
 
-  
-
   HomePageButton({this.title, this.image, this.onTapFunction});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        height: 180,
-        width: 380,
+    return Container(
+      height: 180,
+      width: 380,
+      child: InkWell(
+        onTap: onTapFunction,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -59,7 +58,6 @@ class HomePageButton extends StatelessWidget {
           ),
         ),
       ),
-      onTap: onTapFunction,
     );
   }
 }

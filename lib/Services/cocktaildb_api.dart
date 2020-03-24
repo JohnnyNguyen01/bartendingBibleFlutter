@@ -15,4 +15,11 @@ class CocktailDbAPI{
     return listByName;
   }
 
+  //get cocktail list by alcohol type 
+  Future <dynamic> getByAlcoholType({String alcoholType}) async{
+    NetworkHelper networkHelper = NetworkHelper('$apiURL/filter.php?i=$alcoholType');
+    var listByName = await networkHelper.getData();
+    return listByName;
+  }
+  
 }

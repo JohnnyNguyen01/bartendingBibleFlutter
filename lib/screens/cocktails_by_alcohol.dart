@@ -27,12 +27,12 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
     AlcoholType(
         name: 'Rum',
         description:
-            'Originating from the Carribean, distilled from sugarcane and ages in barrels,',
+            'Originating from the Carribean, distilled from sugarcane and ages in barrels.',
         image: AssetImage('lib/images/anders-nord-rum-unsplash.jpg')),
     AlcoholType(
         name: 'Whisky',
         description:
-            'Grain mashed in oak barrels, believed to be first distilled by monks in 1405',
+            'Grain mashed in oak barrels, believed to be first distilled by monks in 1405.',
         image: AssetImage('lib/images/brian-jones-whisky-unsplash.jpg')),
     AlcoholType(
         name: 'Brandy',
@@ -47,8 +47,8 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-            print('end of scroll list');
-          }
+        print('end of scroll list');
+      }
     });
   }
 
@@ -99,30 +99,43 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
               style: kCardHeading.copyWith(fontWeight: FontWeight.w900),
             ),
           ),
-          SizedBox(height: 15.0),
-          ListView.builder(
-            controller: _scrollController,
-              shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              itemCount: _alcoholTypes.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    onTap: () {},
-                    leading: CircleAvatar(
-                      backgroundImage: _alcoholTypes[index].getImage(),
-                      radius: 30.0,
+          //SizedBox(height: 15.0),
+          Expanded(
+            child: ListView.builder(
+                controller: _scrollController,
+                physics: BouncingScrollPhysics(),
+                itemCount: _alcoholTypes.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Container(
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, switchScreens(index));
+                        },
+                        leading: CircleAvatar(
+                          backgroundImage: _alcoholTypes[index].getImage(),
+                          radius: 30.0,
+                        ),
+                        title: Text(_alcoholTypes[index].getName(),
+                            style: kShowAllBtnStyle),
+                        subtitle: Text(_alcoholTypes[index].getDescription()),
+                        isThreeLine: true,
+                      ),
                     ),
-                    title: Text(_alcoholTypes[index].getName(),
-                        style: kShowAllBtnStyle),
-                    subtitle: Text(_alcoholTypes[index].getDescription()),
-                    isThreeLine: true,
-                  ),
-                );
-              }),
+                  );
+                }),
+          ),
         ],
       ),
     );
   }
 
+  String switchScreens(int index){
+    switch(index){
+      case 0: return '/VodkaCocktails'; break;
+
+      //TODO: fix default case
+      default : return '/'; break;
+    }
+  }
 }
