@@ -9,47 +9,29 @@ class CocktailsByAlcohol extends StatefulWidget {
 
 class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
   ScrollController _scrollController = ScrollController();
-  List<AlcoholType> _alcoholTypes = [
-    AlcoholType(
-        name: 'Vodka',
-        description:
-            'The clear odourless and tasteless liquor distilled from potatoes and grains.',
-        image: AssetImage('lib/images/alec-favale-vodka-unsplash.jpg')),
-    AlcoholType(
-        name: 'Gin',
-        description:
-            'Hailing from Great Britain, produced from grain and flavoured by Juniper Berries.',
-        image: AssetImage('lib/images/bundo-kim-gin-unsplash.jpg')),
-    AlcoholType(
-        name: 'Tequila',
-        description: 'A Mexican original utilising the flavourful Agave plant.',
-        image: AssetImage('lib/images/kevin-kelly-tequila-unsplash.jpg')),
-    AlcoholType(
-        name: 'Rum',
-        description:
-            'Originating from the Carribean, distilled from sugarcane and ages in barrels.',
-        image: AssetImage('lib/images/anders-nord-rum-unsplash.jpg')),
-    AlcoholType(
-        name: 'Whisky',
-        description:
-            'Grain mashed in oak barrels, believed to be first distilled by monks in 1405.',
-        image: AssetImage('lib/images/brian-jones-whisky-unsplash.jpg')),
-    AlcoholType(
-        name: 'Brandy',
-        description:
-            'You though wine was alcoholic? Age it in a barrel for a bit and BOOM. Brandy.',
-        image: AssetImage('lib/images/maria-das-dores-brandy-unsplash.jpg')),
-  ];
+  AlcoholType _alcoholType = AlcoholType();
+  AssetImage heroImage;
+  
 
   @override
   void initState() {
     super.initState();
+    heroImage = AssetImage('lib/images/john-cafazza-unsplash.jpg');
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         print('end of scroll list');
       }
     });
+  }
+
+  /* assign heroImage in initstate. Then use precacheImage in didChangeDependencies
+  for 'instant' render = UNTESTED ON RELEASE */
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    precacheImage(heroImage, context);
   }
 
   @override
@@ -67,7 +49,7 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage('lib/images/john-cafazza-unsplash.jpg'),
+                    image: heroImage,
                   ),
                 ),
               ),
@@ -104,7 +86,7 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
             child: ListView.builder(
                 controller: _scrollController,
                 physics: BouncingScrollPhysics(),
-                itemCount: _alcoholTypes.length,
+                itemCount: _alcoholType.getTypeList().length,
                 itemBuilder: (context, index) {
                   return Card(
                     child: Container(
@@ -113,12 +95,12 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
                           Navigator.pushNamed(context, switchScreens(index));
                         },
                         leading: CircleAvatar(
-                          backgroundImage: _alcoholTypes[index].getImage(),
+                          backgroundImage: _alcoholType.getTypeList()[index].getImage(),
                           radius: 30.0,
                         ),
-                        title: Text(_alcoholTypes[index].getName(),
+                        title: Text(_alcoholType.getTypeList()[index].getName(),
                             style: kShowAllBtnStyle),
-                        subtitle: Text(_alcoholTypes[index].getDescription()),
+                        subtitle: Text(_alcoholType.getTypeList()[index].getDescription()),
                         isThreeLine: true,
                       ),
                     ),

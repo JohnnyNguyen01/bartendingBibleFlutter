@@ -9,6 +9,35 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  AssetImage heroImage;
+  AssetImage classicsImage;
+  AssetImage byAlcoholImage;
+  AssetImage favouritesImage;
+  AssetImage allDrinksImage;
+  AssetImage logo;
+
+  @override
+  void initState() {
+    super.initState();
+    heroImage = AssetImage('lib/images/brooke-lark-unsplash.png');
+    classicsImage = AssetImage('lib/images/brooke-lark-unsplash.png');
+    favouritesImage = AssetImage('lib/images/Spencer-Davis-unsplash.jpg');
+    byAlcoholImage = AssetImage('lib/images/john-cafazza-unsplash.jpg');
+    allDrinksImage = AssetImage('lib/images/johann-trasch-unsplash.jpg');
+    logo = AssetImage('lib/images/bar-app-logo.png');
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(heroImage, context);
+    precacheImage(classicsImage, context);
+    precacheImage(favouritesImage, context);
+    precacheImage(byAlcoholImage, context);
+    precacheImage(allDrinksImage, context);
+    precacheImage(logo, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,10 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 500,
                   height: 300,
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image:
-                            AssetImage('lib/images/brooke-lark-unsplash.png')),
+                    image: DecorationImage(fit: BoxFit.cover, image: heroImage),
                   ),
                 ),
                 // Logo widget
@@ -40,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage('lib/images/bar-app-logo.png')),
+                          image: logo),
                     ),
                   ),
                 ),
@@ -69,11 +95,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomePageButton(
                       title: 'Favourites',
                       image:
-                          AssetImage('lib/images/Spencer-Davis-unsplash.jpg')),
+                          favouritesImage),
                   SizedBox(height: 15),
                   HomePageButton(
                     title: 'Classic Cocktails',
-                    image: AssetImage('lib/images/hessam-hojati-unsplash.jpg'),
+                    image: classicsImage,
                     onTapFunction: () {
                       Navigator.pushNamed(context, '/ClassicCocktails');
                     },
@@ -81,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(height: 15),
                   HomePageButton(
                     title: 'Cocktails By Alcohol',
-                    image: AssetImage('lib/images/john-cafazza-unsplash.jpg'),
+                    image: byAlcoholImage,
                     onTapFunction: () {
                       Navigator.pushNamed(context, '/CocktailsByAlcohol');
                     },
@@ -89,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(height: 15),
                   HomePageButton(
                     title: 'All Cocktails',
-                    image: AssetImage('lib/images/johann-trasch-unsplash.jpg'),
+                    image: allDrinksImage,
                     onTapFunction: () {},
                   ),
                 ],

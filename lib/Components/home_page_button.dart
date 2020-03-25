@@ -11,51 +11,41 @@ class HomePageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
-      width: 380,
-      child: InkWell(
-        onTap: onTapFunction,
+      height: 150,
+      child: FlatButton(
+        onPressed: onTapFunction,
         child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          elevation: 13,
           child: Column(
-            children: <Widget>[
-              Expanded(
-                  child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      //alignment: Alignment.topCenter,
-                      image: image,
-                    ),
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Expanded(
+                  flex: 4,
+                  child: Image(
+                    image: image,
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
-              )),
-              Container(
-                  height: 35,
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        '$title'.toUpperCase(),
-                        style: kShowAllBtnStyle.copyWith(color: Colors.black),
+                Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            title,
+                            style: kShowAllBtnStyle.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            "SHOW ALL",
+                            style: kShowAllBtnStyle,
+                          ),
+                        ],
                       ),
-                      Text(
-                        'SHOW ALL',
-                        style: kShowAllBtnStyle,
-                      ),
-                    ],
-                  )),
-            ],
-          ),
+                    ))
+              ]),
         ),
       ),
     );
