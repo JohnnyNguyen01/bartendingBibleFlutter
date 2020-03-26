@@ -1,8 +1,9 @@
+import 'package:bartender_bible/Util/styles.dart';
 import 'package:flutter/material.dart';
 //import 'package:bartender_bible/Models/drink.dart';
 
 class SingleDrinkLV extends StatefulWidget {
-  ScrollController scrollController;
+  final ScrollController scrollController;
   final Future future;
 
   SingleDrinkLV({this.scrollController, this.future});
@@ -12,7 +13,6 @@ class SingleDrinkLV extends StatefulWidget {
 }
 
 class _SingleDrinkLVState extends State<SingleDrinkLV> {
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -37,21 +37,25 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   ListTile(
+                    contentPadding: EdgeInsets.all(10),
                     onTap: () {},
-                    title: Text(snapshot.data[index].name),
-                    leading: CircleAvatar(
-                      backgroundImage:
-                          NetworkImage(snapshot.data[index].drinkThumbURL),
-                      radius: 25,
+                    title: Text(
+                      snapshot.data[index].name,
+                      style: kShowAllBtnStyle.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                      trailing: GestureDetector(child: Icon(Icons.favorite), 
-                      onTap: (){
-                        setState(() {
-                     
-                        });
-                    },),
+                    leading: Image.network(
+                        '${snapshot.data[index].drinkThumbURL}/preview'),
+                    trailing: GestureDetector(
+                      child: Icon(Icons.favorite),
+                      onTap: () {
+                        setState(() {});
+                      },
+                    ),
                   ),
-                  Container(height:1, width: 40, color:Colors.grey.shade300)
+                  Container(height: 1, width: 40, color: Colors.grey.shade300)
                 ],
               );
             },
