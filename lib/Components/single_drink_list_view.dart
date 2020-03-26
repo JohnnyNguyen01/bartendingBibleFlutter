@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class SingleDrinkLV extends StatefulWidget {
   ScrollController scrollController;
-  Future future;
+  final Future future;
 
   SingleDrinkLV({this.scrollController, this.future});
 

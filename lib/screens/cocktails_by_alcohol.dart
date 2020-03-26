@@ -114,6 +114,11 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
   String switchScreens(int index){
     switch(index){
       case 0: return '/VodkaCocktails'; break;
+      case 1: return '/GinCocktails'; break;
+      case 2: return '/TequilaCocktails'; break;
+      case 3: return '/RumCocktails'; break;
+      case 4: return '/WhiskyCocktails'; break;
+      case 5: return '/BrandyCocktails'; break;
 
       //TODO: fix default case
       default : return '/'; break;

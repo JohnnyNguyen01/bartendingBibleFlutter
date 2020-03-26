@@ -3,13 +3,12 @@ import 'package:bartender_bible/Util/styles.dart';
 import 'package:bartender_bible/Services/cocktaildb_api.dart';
 import 'package:bartender_bible/Components/single_drink_list_view.dart';
 
-class VodkaSelectionScreen extends StatefulWidget {
+class TequilaSelectionScreen extends StatefulWidget {
   @override
-  _VodkaSelectionScreenState createState() => _VodkaSelectionScreenState();
+  _TequilaSelectionScreenState createState() => _TequilaSelectionScreenState();
 }
 
-class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
-
+class _TequilaSelectionScreenState extends State<TequilaSelectionScreen> {
   @override
   void initState() {
     super.initState();
@@ -30,8 +29,8 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image:
-                        AssetImage('lib/images/alec-favale-vodka-unsplash.jpg'),
+                    image: AssetImage(
+                        'lib/images/kevin-kelly-tequila-unsplash.jpg'),
                   ),
                 ),
               ),
@@ -45,7 +44,7 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
                     height: 40,
                     child: Center(
                       child: Text(
-                        'Vodka Selection',
+                        'Tequila Selection',
                         style: kCardHeading,
                       ),
                     ),
@@ -57,7 +56,7 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
           ),
           SizedBox(height: 28.0),
           SingleDrinkLV(
-            future: cdbAPI.getByAlcoholType(alcoholType: 'Vodka'),
+            future: cdbAPI.getByAlcoholType(alcoholType: 'Tequila'),
           ),
         ],
       ),

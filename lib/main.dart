@@ -1,3 +1,8 @@
+import 'package:bartender_bible/screens/cocktails_brandy_screen.dart';
+import 'package:bartender_bible/screens/cocktails_by_gin_screen.dart';
+import 'package:bartender_bible/screens/cocktails_rum.dart';
+import 'package:bartender_bible/screens/cocktails_tequila_screen.dart';
+import 'package:bartender_bible/screens/cocktails_whisky_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/classic_cocktails_screen.dart';
@@ -26,6 +31,11 @@ class MyApp extends StatelessWidget {
         '/ClassicCocktails': (context) => ClassicsScreen(),
         '/CocktailsByAlcohol': (context) => CocktailsByAlcohol(),
         '/VodkaCocktails': (context) => VodkaSelectionScreen(),
+        '/GinCocktails': (context) => GinSelectionScreen(),
+        '/TequilaCocktails': (context) => TequilaSelectionScreen(),
+        '/RumCocktails': (context) => RumSelectionScreen(),
+        '/WhiskyCocktails': (context) => WhiskySelectionScreen(),
+        '/BrandyCocktails': (context) => BrandySelectionScreen(),
       },
     );
   }

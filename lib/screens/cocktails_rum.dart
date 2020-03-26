@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:bartender_bible/Util/styles.dart';
 import 'package:bartender_bible/Services/cocktaildb_api.dart';
+import 'package:bartender_bible/Models/drink.dart';
 import 'package:bartender_bible/Components/single_drink_list_view.dart';
 
-class VodkaSelectionScreen extends StatefulWidget {
+class RumSelectionScreen extends StatefulWidget {
   @override
-  _VodkaSelectionScreenState createState() => _VodkaSelectionScreenState();
+  _RumSelectionScreenState createState() => _RumSelectionScreenState();
 }
 
-class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
-
+class _RumSelectionScreenState extends State<RumSelectionScreen> {
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image:
-                        AssetImage('lib/images/alec-favale-vodka-unsplash.jpg'),
+                        AssetImage('lib/images/anders-nord-rum-unsplash.jpg'),
                   ),
                 ),
               ),
@@ -45,7 +45,7 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
                     height: 40,
                     child: Center(
                       child: Text(
-                        'Vodka Selection',
+                        'Rum Selection',
                         style: kCardHeading,
                       ),
                     ),
@@ -57,7 +57,7 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
           ),
           SizedBox(height: 28.0),
           SingleDrinkLV(
-            future: cdbAPI.getByAlcoholType(alcoholType: 'Vodka'),
+            future: cdbAPI.getByAlcoholType(alcoholType: 'Rum'),
           ),
         ],
       ),
