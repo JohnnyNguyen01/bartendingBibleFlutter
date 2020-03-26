@@ -6,6 +6,7 @@ class NetworkHelper{
 
   NetworkHelper(this.url);
 
+  //grabs data from URL and decodes it into a json object
   Future getData() async{
     http.Response response = await http.get(url);
    

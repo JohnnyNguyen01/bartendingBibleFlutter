@@ -16,11 +16,11 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
   @override
   void initState() {
     super.initState();
-    makeMap();
   }
 
   @override
   Widget build(BuildContext context) {
+    CocktailDbAPI cdbAPI = CocktailDbAPI();
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -60,11 +60,8 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
           ),
           SizedBox(height: 28.0),
           //TODO : fix list loading issue
-          Expanded(
-            child: SingleDrinkLV(
-              scrollController: _scrollController,
-              drinkList: drinkList,
-            ),
+          SingleDrinkLV(
+            future: cdbAPI.getByAlcoholType(alcoholType: 'Vodka'),
           ),
         ],
       ),
@@ -72,13 +69,5 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
   }
 
   //Get search result, turn into list, convert all object from json List into Objects of drink in drinkLIST
-  void makeMap() async {
-    CocktailDbAPI cdb = CocktailDbAPI();
-    var response = await cdb.getByAlcoholType(alcoholType: "Vodka");
-    var result = response['drinks'] as List;
-    for (var jsonObject in result) {
-      drinkList.add(Drink(jsonObject));
-    }
-    print('length is ${drinkList.length}');
-  }
+
 }

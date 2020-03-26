@@ -29,7 +29,6 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
   for 'instant' render = UNTESTED ON RELEASE */
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     precacheImage(heroImage, context);
   }
@@ -38,7 +37,7 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        //crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Stack(
             overflow: Overflow.visible,

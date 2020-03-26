@@ -1,11 +1,8 @@
 class Drink{
-   String name;
-   String drinkThumbURL;
-   String drinkID;
+   final String name;
+   final String drinkThumbURL;
+   final String drinkID;
 
-  Drink(Map<dynamic, dynamic> data){
-    name = data['strDrink'];
-    drinkThumbURL = data['strDrinkThumb']; 
-    drinkID = data['idDrink'];
-  }
+  Drink({this.drinkID, this.name, this.drinkThumbURL});
+
 }
