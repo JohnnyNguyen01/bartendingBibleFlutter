@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bartender_bible/Util/styles.dart';
 import 'package:bartender_bible/Services/cocktaildb_api.dart';
-import 'package:bartender_bible/Models/drink.dart';
 import 'package:bartender_bible/Components/single_drink_list_view.dart';
 
 class RumSelectionScreen extends StatefulWidget {

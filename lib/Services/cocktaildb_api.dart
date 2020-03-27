@@ -1,4 +1,5 @@
 import 'package:bartender_bible/Models/drink.dart';
+import 'package:bartender_bible/Models/individual_drink.dart';
 import 'package:bartender_bible/Services/networking.dart';
 
 const apiKey = '1';
@@ -32,4 +33,43 @@ class CocktailDbAPI {
     print(listByName.length);
     return listByName;
   }
+
+  //get indivudial cocktail by cocktail-ID
+  //https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
+  Future<IndividualDrink> getByDrinkID({String drinkID}) async {
+    NetworkHelper networkhelper =
+        NetworkHelper('$apiURL/lookup.php?i=$drinkID');
+    var data = await networkhelper.getData();
+    List<String> ingredientList = [];
+    List<String> measureList = [];
+    /*
+        1. Iterate through data map -> look at map.forEach
+        2. If key contains 'strIngredient' add the value to ingredientlist (even if null)
+        3. If key contains 'strMeasure' add the value to measureList (even if null)
+        4. check and make sure ingredientList.length == measureList.length
+     */
+    Map data_map = data[0];
+
+    data_map.forEach((key, value) {
+      if (key.contains('strIngredient')) ingredientList.add(value);
+
+      if (key.contains('strMeasure')) measureList.add(value);
+    });
+
+    IndividualDrink drink = IndividualDrink(
+        drinkID: data[0]['idDrink'],
+        drinkName: data[0]['strDrink'],
+        tags: data[0]['strTags'],
+        category: data[0]['strCategory'],
+        iba: data[0]['strIBA'],
+        alcoholic: data[0]['strAlcoholic'],
+        glassType: data[0]['strGlass'],
+        instructionsEng: data[0]['strInstructions'],
+        thumbURL: data[0]['strDrinkThumb'],
+        ingredients: ingredientList,
+        measurements: measureList);
+
+    return drink;
+  }
 }
+/*drinks[0].idDrink */

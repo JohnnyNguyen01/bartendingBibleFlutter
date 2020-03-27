@@ -120,7 +120,6 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
       case 4: return '/WhiskyCocktails'; break;
       case 5: return '/BrandyCocktails'; break;
 
-      //TODO: fix default case
       default : return '/'; break;
     }
   }
