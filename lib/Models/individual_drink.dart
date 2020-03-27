@@ -1,5 +1,5 @@
 class IndividualDrink {
-  final int drinkID;
+  final String drinkID;
   final String drinkName;
   final String tags;
   final String category;

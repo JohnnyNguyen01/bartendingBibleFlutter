@@ -1,6 +1,7 @@
 import 'package:bartender_bible/Models/drink.dart';
 import 'package:bartender_bible/Models/individual_drink.dart';
 import 'package:bartender_bible/Services/networking.dart';
+import 'dart:convert';
 
 const apiKey = '1';
 const apiURL = 'https://www.thecocktaildb.com/api/json/v1/$apiKey';
@@ -30,7 +31,6 @@ class CocktailDbAPI {
           drinkThumbURL: object['strDrinkThumb']);
       listByName.add(drink);
     }
-    print(listByName.length);
     return listByName;
   }
 
@@ -48,28 +48,28 @@ class CocktailDbAPI {
         3. If key contains 'strMeasure' add the value to measureList (even if null)
         4. check and make sure ingredientList.length == measureList.length
      */
-    Map data_map = data[0];
-
-    data_map.forEach((key, value) {
+   
+    Map parsedMap = data['drinks'][0];
+    parsedMap.forEach((key, value) {
       if (key.contains('strIngredient')) ingredientList.add(value);
 
       if (key.contains('strMeasure')) measureList.add(value);
     });
 
     IndividualDrink drink = IndividualDrink(
-        drinkID: data[0]['idDrink'],
-        drinkName: data[0]['strDrink'],
-        tags: data[0]['strTags'],
-        category: data[0]['strCategory'],
-        iba: data[0]['strIBA'],
-        alcoholic: data[0]['strAlcoholic'],
-        glassType: data[0]['strGlass'],
-        instructionsEng: data[0]['strInstructions'],
-        thumbURL: data[0]['strDrinkThumb'],
+        drinkID: data['drinks'][0]['idDrink'],
+        drinkName: data['drinks'][0]['strDrink'],
+        tags: data['drinks'][0]['strTags'],
+        category: data['drinks'][0]['strCategory'],
+        iba: data['drinks'][0]['strIBA'],
+        alcoholic: data['drinks'][0]['strAlcoholic'],
+        glassType: data['drinks'][0]['strGlass'],
+        instructionsEng: data['drinks'][0]['strInstructions'],
+        thumbURL: data['drinks'][0]['strDrinkThumb'],
         ingredients: ingredientList,
         measurements: measureList);
-
+    
     return drink;
   }
 }
-/*drinks[0].idDrink */
+/*drinks[0].strDrinkThumb */

@@ -1,6 +1,6 @@
 import 'package:bartender_bible/Util/styles.dart';
 import 'package:flutter/material.dart';
-//import 'package:bartender_bible/Models/drink.dart';
+import 'package:bartender_bible/screens/drink_recipe_screen.dart';
 
 class SingleDrinkLV extends StatefulWidget {
   final ScrollController scrollController;
@@ -38,7 +38,13 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
                 children: <Widget>[
                   ListTile(
                     contentPadding: EdgeInsets.all(10),
-                    onTap: () {},
+                    onTap: () {
+                      //parse this drink id: snapshot.data[index].drinkID
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => IndividualDrinkPage(snapshot.data[index].drinkID)));
+                    },
                     title: Text(
                       snapshot.data[index].name,
                       style: kShowAllBtnStyle.copyWith(
@@ -50,9 +56,7 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
                         '${snapshot.data[index].drinkThumbURL}/preview'),
                     trailing: GestureDetector(
                       child: Icon(Icons.favorite),
-                      onTap: () {
-                        setState(() {});
-                      },
+                      onTap: () {},
                     ),
                   ),
                   Container(height: 1, width: 40, color: Colors.grey.shade300)
