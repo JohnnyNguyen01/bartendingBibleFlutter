@@ -50,7 +50,7 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                     ),
                     Positioned(
                       left: 80,
-                      right: 80,
+                      right: 80, 
                       bottom: -70,
                       child: Card(
                         elevation: 5.0,
