@@ -51,9 +51,9 @@ class CocktailDbAPI {
    
     Map parsedMap = data['drinks'][0];
     parsedMap.forEach((key, value) {
-      if (key.contains('strIngredient')) ingredientList.add(value);
+      if (key.contains('strIngredient') && value != null) ingredientList.add(value);
 
-      if (key.contains('strMeasure')) measureList.add(value);
+      if (key.contains('strMeasure') && value != null) measureList.add(value);
     });
 
     IndividualDrink drink = IndividualDrink(

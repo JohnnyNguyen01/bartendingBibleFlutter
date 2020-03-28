@@ -23,4 +23,5 @@ class IndividualDrink {
       this.thumbURL,
       this.ingredients,
       this.measurements});
+
 }
