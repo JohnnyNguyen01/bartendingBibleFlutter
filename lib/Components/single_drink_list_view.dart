@@ -1,3 +1,4 @@
+import 'package:bartender_bible/Components/favourtie_button.dart';
 import 'package:bartender_bible/Util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:bartender_bible/screens/drink_recipe_screen.dart';
@@ -55,7 +56,7 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
                     leading: Image.network(
                         '${snapshot.data[index].drinkThumbURL}/preview'),
                     trailing: GestureDetector(
-                      child: Icon(Icons.favorite),
+                      child: FavouriteButton(drinkName: snapshot.data[index].name,),
                       onTap: () {},
                     ),
                   ),
