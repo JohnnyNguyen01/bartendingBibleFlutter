@@ -34,80 +34,74 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
         future: cdbAPI.getByDrinkID(drinkID: widget.drinkID.toString()),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return Scaffold(body: LayoutBuilder(
-              builder:
-                  (BuildContext context, BoxConstraints viewportConstraints) {
-                return SingleChildScrollView(
-                    child: ConstrainedBox(
-                  constraints:
-                      BoxConstraints(minHeight: viewportConstraints.maxHeight),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Stack(
-                        overflow: Overflow.visible,
-                        children: <Widget>[
-                          Container(
-                            height: 270,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(snapshot.data.thumbURL),
-                              ),
+            return Scaffold(
+              body: IntrinsicHeight(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Stack(
+                      overflow: Overflow.visible,
+                      children: <Widget>[
+                        Container(
+                          height: 270,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(snapshot.data.thumbURL),
                             ),
                           ),
-                          Positioned(
-                            left: 80,
-                            right: 80,
-                            bottom: -70,
-                            child: Card(
-                              elevation: 10.0,
-                              child: Container(
-                                padding: EdgeInsets.only(left: 10, right: 10),
-                                height: 130.0,
-                                child: Center(
-                                  child: Text(
-                                    '${snapshot.data.drinkName}',
-                                    style: GoogleFonts.roboto(
-                                        textStyle: TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.w700)),
-                                  ),
+                        ),
+                        Positioned(
+                          left: 80,
+                          right: 80,
+                          bottom: -70,
+                          child: Card(
+                            elevation: 10.0,
+                            child: Container(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              height: 130.0,
+                              child: Center(
+                                child: Text(
+                                  '${snapshot.data.drinkName}',
+                                  style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.w700)),
                                 ),
                               ),
                             ),
                           ),
-                          //ListView.builder(itemBuilder: null),
-                        ],
-                      ),
-                      SizedBox(height: 95.0),
-                      Center(
-                          child: Text(
-                        "I N G R E D I E N T S",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 17.0),
-                      )),
-                      Container(
-                        //TODO make height dynamic not fixed!
-                        height: 900,
-                        child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: snapshot.data.ingredients.length,
-                            itemBuilder: (context, index) {
-                              return Card(
-                                  child: ListTile(
-                                title: Text(snapshot.data.ingredients[index]),
-                                trailing: Column(children: <Widget>[
-                                  Text('AMOUNT'),Text(snapshot.data.measurements[index])
-                                ]),
-                              ));
-                            }),
-                      ),
-                    ],
-                  ),
-                ));
-              },
-            ));
+                        ),
+                        //ListView.builder(itemBuilder: null),
+                      ],
+                    ),
+                    SizedBox(height: 95.0),
+                    Center(
+                        child: Text(
+                      "I N G R E D I E N T S",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700, fontSize: 17.0),
+                    )),
+                    Expanded(
+                      child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: snapshot.data.ingredients.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                                child: ListTile(
+                              title: Text(snapshot.data.ingredients[index]),
+                              trailing: Column(children: <Widget>[
+                                Text('AMOUNT'),
+                                Text(snapshot.data.measurements[index])
+                              ]),
+                            ));
+                          }),
+                    ),
+                    Text("Hello there"),
+                  ],
+                ),
+              ),
+            );
           }
           /*When future hasn't resolved show a circular progress indicator */
           else {

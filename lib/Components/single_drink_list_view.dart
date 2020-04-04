@@ -24,10 +24,7 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
           if (snapshot.data == null) {
             return Center(
               child: Container(
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.orange,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
+                child: OrangeCircleIndicator(),
               ),
             );
           }
@@ -44,7 +41,8 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => IndividualDrinkPage(snapshot.data[index].drinkID)));
+                              builder: (context) => IndividualDrinkPage(
+                                  snapshot.data[index].drinkID)));
                     },
                     title: Text(
                       snapshot.data[index].name,
@@ -54,9 +52,17 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
                       ),
                     ),
                     leading: Image.network(
-                        '${snapshot.data[index].drinkThumbURL}/preview'),
+                      '${snapshot.data[index].drinkThumbURL}/preview',
+                      loadingBuilder: (context, child, progress) {
+                        return progress == null
+                            ? child
+                            : OrangeCircleIndicator();
+                      },
+                    ),
                     trailing: GestureDetector(
-                      child: FavouriteButton(drinkName: snapshot.data[index].name,),
+                      child: FavouriteButton(
+                        drinkName: snapshot.data[index].name,
+                      ),
                       onTap: () {},
                     ),
                   ),
@@ -67,6 +73,16 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
           );
         },
       ),
+    );
+  }
+}
+
+class OrangeCircleIndicator extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CircularProgressIndicator(
+      backgroundColor: Colors.orange,
+      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
     );
   }
 }
