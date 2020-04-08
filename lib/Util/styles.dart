@@ -5,3 +5,5 @@ final TextStyle kCardHeading =
     GoogleFonts.poppins(textStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0));
 final TextStyle kShowAllBtnStyle =
     GoogleFonts.poppins(textStyle: TextStyle(color: Colors.orange));
+final TextStyle kIngredientTitleStyle =
+    GoogleFonts.poppins(textStyle: TextStyle(fontWeight: FontWeight.w500, color: Colors.black));

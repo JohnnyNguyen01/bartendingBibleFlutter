@@ -1,3 +1,4 @@
+import 'package:bartender_bible/Components/favourtie_button.dart';
 import 'package:bartender_bible/Models/individual_drink.dart';
 import 'package:bartender_bible/Services/cocktaildb_api.dart';
 import 'package:bartender_bible/Util/styles.dart';
@@ -54,6 +55,12 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                           ),
                         ),
                         Positioned(
+                            left: 40,
+                            right: 40,
+                            top: 50,
+                            bottom: -100,
+                            child: FavouriteButton()),
+                        Positioned(
                           left: 80,
                           right: 80,
                           bottom: -70,
@@ -74,6 +81,7 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                             ),
                           ),
                         ),
+
                         //ListView.builder(itemBuilder: null),
                       ],
                     ),
@@ -90,19 +98,38 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                         itemCount: snapshot.data.ingredients.length,
                         itemBuilder: (context, index) {
                           return Card(
-                            margin: EdgeInsets.fromLTRB(30,8,30,8),
-                            elevation: 8,
+                            margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                            elevation: 8.0,
                             child: ListTile(
-                              title: Text(snapshot.data.ingredients[index]),
+                              contentPadding: EdgeInsets.all(7.0),
+                              leading: cdbAPI.getIngredientImage(imageName: snapshot.data.ingredients[index]),
+                              title: Text(snapshot.data.ingredients[index], style: kIngredientTitleStyle,),
                               trailing: Column(children: <Widget>[
-                                Text("AMOUNT"),
+                                Text("AMOUNT", style: kShowAllBtnStyle,),
                                 SizedBox(height: 8),
                                 Text(snapshot.data.measurements[index]),
                               ]),
                             ),
                           );
                         }),
-                    Text("Hello there"),
+                    Center(
+                        child: Text(
+                      "I N S T R U C T I O N S",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700, fontSize: 17.0),
+                    )),
+                    SizedBox(height: 35.0),
+                    Container(
+                        height: 400.0,
+                        child: Card(
+                          margin: EdgeInsets.only(left: 30, right: 30),
+                          elevation: 10,
+                          child: Column(children: <Widget>[
+                            Text("Testing"),
+                            Text(snapshot.data.instructionsEng),
+                          ]),
+                        )),
+                    SizedBox(height: 35.0),
                   ],
                 ),
               ),

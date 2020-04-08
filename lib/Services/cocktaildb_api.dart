@@ -1,6 +1,7 @@
 import 'package:bartender_bible/Models/drink.dart';
 import 'package:bartender_bible/Models/individual_drink.dart';
 import 'package:bartender_bible/Services/networking.dart';
+import 'package:flutter/material.dart';
 import 'dart:convert';
 
 const apiKey = '1';
@@ -48,14 +49,16 @@ class CocktailDbAPI {
         3. If key contains 'strMeasure' add the value to measureList (even if null)
         4. check and make sure ingredientList.length == measureList.length
      */
-   
     Map parsedMap = data['drinks'][0];
     parsedMap.forEach((key, value) {
-      if (key.contains('strIngredient') && value != null) ingredientList.add(value);
-
+      if (key.contains('strIngredient') && value != null)
+        ingredientList.add(value);
       if (key.contains('strMeasure') && value != null) measureList.add(value);
     });
-
+    
+    while (ingredientList.length > measureList.length) {
+      measureList.add('');
+    }
     IndividualDrink drink = IndividualDrink(
         drinkID: data['drinks'][0]['idDrink'],
         drinkName: data['drinks'][0]['strDrink'],
@@ -68,8 +71,12 @@ class CocktailDbAPI {
         thumbURL: data['drinks'][0]['strDrinkThumb'],
         ingredients: ingredientList,
         measurements: measureList);
-    
+
     return drink;
   }
+
+  Image getIngredientImage({String imageName}) {
+    return Image.network(
+        'https://www.thecocktaildb.com/images/ingredients/${imageName.toLowerCase()}-Small.png');
+  }
 }
-/*drinks[0].strDrinkThumb */
