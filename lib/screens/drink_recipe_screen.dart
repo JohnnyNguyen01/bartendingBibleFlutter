@@ -54,12 +54,7 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                             ),
                           ),
                         ),
-                        Positioned(
-                            left: 40,
-                            right: 40,
-                            top: 50,
-                            bottom: -100,
-                            child: FavouriteButton()),
+
                         Positioned(
                           left: 80,
                           right: 80,
@@ -69,14 +64,25 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                             child: Container(
                               padding: EdgeInsets.only(left: 10, right: 10),
                               height: 130.0,
-                              child: Center(
-                                child: Text(
-                                  '${snapshot.data.drinkName}',
-                                  style: GoogleFonts.roboto(
-                                      textStyle: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.w700)),
-                                ),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[FavouriteButton(drinkName: snapshot.data.drinkName,)],
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Text(snapshot.data.alcoholic),
+                                  Center(
+                                    child: Text(
+                                      '${snapshot.data.drinkName}',
+                                      style: kSingleDrinkCardHeading,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(snapshot.data.category),
+                                ],
                               ),
                             ),
                           ),
@@ -102,16 +108,24 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                             elevation: 8.0,
                             child: ListTile(
                               contentPadding: EdgeInsets.all(7.0),
-                              leading: cdbAPI.getIngredientImage(imageName: snapshot.data.ingredients[index]),
-                              title: Text(snapshot.data.ingredients[index], style: kIngredientTitleStyle,),
+                              leading: cdbAPI.getIngredientImage(
+                                  imageName: snapshot.data.ingredients[index]),
+                              title: Text(
+                                snapshot.data.ingredients[index],
+                                style: kIngredientTitleStyle,
+                              ),
                               trailing: Column(children: <Widget>[
-                                Text("AMOUNT", style: kShowAllBtnStyle,),
+                                Text(
+                                  "AMOUNT",
+                                  style: kShowAllBtnStyle,
+                                ),
                                 SizedBox(height: 8),
                                 Text(snapshot.data.measurements[index]),
                               ]),
                             ),
                           );
                         }),
+                    SizedBox(height: 20.0),
                     Center(
                         child: Text(
                       "I N S T R U C T I O N S",
@@ -120,14 +134,18 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                     )),
                     SizedBox(height: 35.0),
                     Container(
-                        height: 400.0,
+                        height: 150.0,
                         child: Card(
                           margin: EdgeInsets.only(left: 30, right: 30),
                           elevation: 10,
-                          child: Column(children: <Widget>[
-                            Text("Testing"),
-                            Text(snapshot.data.instructionsEng),
-                          ]),
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(
+                              snapshot.data.instructionsEng,
+                              style: kRegularTextStyle,
+                            ),
+                          )),
                         )),
                     SizedBox(height: 35.0),
                   ],
