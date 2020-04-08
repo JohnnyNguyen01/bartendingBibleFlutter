@@ -32,10 +32,12 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: cdbAPI.getByDrinkID(drinkID: widget.drinkID.toString()),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<IndividualDrink> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
-              body: IntrinsicHeight(
+              body: SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
@@ -82,21 +84,24 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700, fontSize: 17.0),
                     )),
-                    Expanded(
-                      child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: snapshot.data.ingredients.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                                child: ListTile(
+                    ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: snapshot.data.ingredients.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            margin: EdgeInsets.fromLTRB(30,8,30,8),
+                            elevation: 8,
+                            child: ListTile(
                               title: Text(snapshot.data.ingredients[index]),
                               trailing: Column(children: <Widget>[
-                                Text('AMOUNT'),
-                                Text(snapshot.data.measurements[index])
+                                Text("AMOUNT"),
+                                SizedBox(height: 8),
+                                Text(snapshot.data.measurements[index]),
                               ]),
-                            ));
-                          }),
-                    ),
+                            ),
+                          );
+                        }),
                     Text("Hello there"),
                   ],
                 ),
@@ -105,11 +110,13 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
           }
           /*When future hasn't resolved show a circular progress indicator */
           else {
-            return Center(
-              child: Container(
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.orange,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            return Scaffold(
+              body: Center(
+                child: Container(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.orange,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
                 ),
               ),
             );
