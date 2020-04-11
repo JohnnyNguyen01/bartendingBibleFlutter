@@ -21,12 +21,32 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
         future: widget.future,
         //snapshot returns data from the future after it resolves
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.data == null) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: Container(
                 child: OrangeCircleIndicator(),
               ),
             );
+          }
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.data == null) {
+            return Scaffold(
+                body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.sentiment_dissatisfied,
+                    color: Colors.grey,
+                    size: 50.0,
+                  ),
+                  Text(
+                    'Unfortunately, no results were found.',
+                    style: kRegularTextStyle.copyWith(color: Colors.grey[600], fontSize: 15.0),
+                  ),
+                ],
+              ),
+            ));
           }
           return ListView.builder(
             itemCount: snapshot.data.length,

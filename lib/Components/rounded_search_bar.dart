@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bartender_bible/screens/search_results_screen.dart';
 
 class RoundedSearchBar extends StatefulWidget {
   @override
@@ -7,7 +8,6 @@ class RoundedSearchBar extends StatefulWidget {
 
 class _RoundedSearchBarState extends State<RoundedSearchBar> {
   String _input;
-
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +20,9 @@ class _RoundedSearchBarState extends State<RoundedSearchBar> {
           padding: EdgeInsets.only(left: 10),
           width: 300,
           child: TextField(
+            onSubmitted: (value) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResultScreen(searchTerm: value)));
+            },
             decoration: InputDecoration(
                 icon: Icon(Icons.search),
                 border: InputBorder.none,

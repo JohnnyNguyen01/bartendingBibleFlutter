@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:bartender_bible/Components/single_drink_list_view.dart';
 import 'package:bartender_bible/Models/drink.dart';
 import 'package:bartender_bible/screens/drink_recipe_screen.dart';
@@ -44,7 +43,7 @@ class _RandomCocktailScreenState extends State<RandomCocktailScreen> {
           }
           return Scaffold(
             body: SafeArea(
-                          child: Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Image.asset('lib/images/bar-app-logo.png', scale: 6),
@@ -124,18 +123,28 @@ class _RandomCocktailScreenState extends State<RandomCocktailScreen> {
                       Column(
                         children: <Widget>[
                           Row(children: <Widget>[
-                            Icon(Icons.arrow_back, color: Colors.red[600], size: 30.0),
-                            Icon(Icons.sentiment_dissatisfied, color: Colors.red[600], size: 30.0),
+                            Icon(Icons.arrow_back,
+                                color: Colors.red[600], size: 30.0),
+                            Icon(Icons.sentiment_dissatisfied,
+                                color: Colors.red[600], size: 30.0),
                           ]),
-                          Text("    Swipe Left to \n remove Cocktail", style: kIngredientTitleStyle,),
+                          Text(
+                            "    Swipe Left to \n remove Cocktail",
+                            style: kIngredientTitleStyle,
+                          ),
                         ],
                       ),
                       Column(children: <Widget>[
                         Row(children: <Widget>[
-                          Icon(Icons.sentiment_very_satisfied, color: Colors.green[600], size: 30.0),
-                          Icon(Icons.arrow_forward, color: Colors.green[600], size: 30.0),
+                          Icon(Icons.sentiment_very_satisfied,
+                              color: Colors.green[600], size: 30.0),
+                          Icon(Icons.arrow_forward,
+                              color: Colors.green[600], size: 30.0),
                         ]),
-                        Text('Swipe Right to \n show Cocktail!', style: kIngredientTitleStyle,),
+                        Text(
+                          'Swipe Right to \n show Cocktail!',
+                          style: kIngredientTitleStyle,
+                        ),
                       ])
                     ],
                   )

@@ -7,7 +7,6 @@ const apiKey = '9973533';
 const apiURL = 'https://www.thecocktaildb.com/api/json/v2/$apiKey';
 
 class CocktailDbAPI {
-//get 5 random cocktails
 //https://www.thecocktaildb.com/api/json/v2/9973533/randomselection.php
   Future<List<Drink>> getTenRandomDrinks() async {
     List<Drink> drinkList = [];
@@ -35,10 +34,36 @@ class CocktailDbAPI {
   }
 
   //get cocktail list by name specified by user
-  Future<dynamic> getByName({String name}) async {
+  Future<List<Drink>> getByName({String name}) async {
     NetworkHelper networkHelper = NetworkHelper('$apiURL/search.php?s=$name');
-    var listByName = await networkHelper.getData();
-    return listByName;
+    var data = await networkHelper.getData();
+    List<Drink> drinkList = [];
+    if (data['drinks'] != null) {
+      for (var object in data['drinks']) {
+        Drink drink = Drink(
+            drinkID: object['idDrink'],
+            name: object['strDrink'],
+            drinkThumbURL: object['strDrinkThumb']);
+        drinkList.add(drink);
+      }
+      return drinkList;
+    } else if (data['drinks'] == null) return null;
+  }
+
+  //search cocktail by First Letter
+  Future<List<Drink>> getByFirstLetter({String letter}) async {
+    NetworkHelper networkHelper = NetworkHelper('$apiURL/search.php?f=$letter');
+    var data = await networkHelper.getData();
+    List<Drink> drinkList = [];
+
+    for (var object in data['drinks']) {
+      Drink drink = Drink(
+          drinkID: object['idDrink'],
+          name: object['strDrink'],
+          drinkThumbURL: object['strDrinkThumb']);
+      drinkList.add(drink);
+    }
+    return drinkList;
   }
 
   //get cocktail list by alcohol type
