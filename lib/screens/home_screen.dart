@@ -98,10 +98,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           favouritesImage),
                   SizedBox(height: 15),
                   HomePageButton(
-                    title: 'Classic Cocktails',
+                    title: 'Random Cocktails',
                     image: classicsImage,
                     onTapFunction: () {
-                      Navigator.pushNamed(context, '/ClassicCocktails');
+                      Navigator.pushNamed(context, '/RandomCocktails');
                     },
                   ),
                   SizedBox(height: 15),

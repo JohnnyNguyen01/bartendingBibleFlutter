@@ -3,7 +3,6 @@ import 'package:bartender_bible/Models/individual_drink.dart';
 import 'package:bartender_bible/Services/cocktaildb_api.dart';
 import 'package:bartender_bible/Util/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class IndividualDrinkPage extends StatefulWidget {
   final String drinkID;
@@ -15,18 +14,6 @@ class IndividualDrinkPage extends StatefulWidget {
 class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
   CocktailDbAPI cdbAPI = CocktailDbAPI();
   IndividualDrink drink;
-
-  //Assigns the future drink object to drink, used in initState
-  void getDrink() async {
-    drink = await cdbAPI.getByDrinkID(drinkID: widget.drinkID.toString());
-    print(drink.ingredients.length);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getDrink();
-  }
 
   /* for Future Builder: Future returned is type IndividualDrink */
   @override
@@ -134,7 +121,7 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                     )),
                     SizedBox(height: 35.0),
                     Container(
-                        height: 150.0,
+                        height: 180.0,
                         child: Card(
                           margin: EdgeInsets.only(left: 30, right: 30),
                           elevation: 10,

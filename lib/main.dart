@@ -5,7 +5,7 @@ import 'package:bartender_bible/screens/cocktails_tequila_screen.dart';
 import 'package:bartender_bible/screens/cocktails_whisky_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
-import 'screens/classic_cocktails_screen.dart';
+import 'screens/random_cocktails_screen.dart';
 import 'screens/cocktails_by_alcohol.dart';
 import 'screens/cocktails_by_vodka.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),
-        '/ClassicCocktails': (context) => ClassicsScreen(),
+        '/RandomCocktails': (context) => RandomCocktailScreen(),
         '/CocktailsByAlcohol': (context) => CocktailsByAlcohol(),
         '/VodkaCocktails': (context) => VodkaSelectionScreen(),
         '/GinCocktails': (context) => GinSelectionScreen(),

@@ -23,6 +23,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   google_fonts: ^0.3.10
   fluttertoast: ^4.0.1
+  flutter_tindercard: ^0.1.8
+
+
 
 dev_dependencies:
   flutter_test:

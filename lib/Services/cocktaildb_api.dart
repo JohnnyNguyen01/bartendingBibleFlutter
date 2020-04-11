@@ -2,7 +2,6 @@ import 'package:bartender_bible/Models/drink.dart';
 import 'package:bartender_bible/Models/individual_drink.dart';
 import 'package:bartender_bible/Services/networking.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 
 const apiKey = '1';
 const apiURL = 'https://www.thecocktaildb.com/api/json/v1/$apiKey';
@@ -10,6 +9,30 @@ const apiURL = 'https://www.thecocktaildb.com/api/json/v1/$apiKey';
 class CocktailDbAPI {
   //NetworkHelper networkHelper = NetworkHelper(url);
   //https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
+
+//get 5 random cocktails
+  Future<List<IndividualDrink>> getFiveRandomDrinks() async {
+    IndividualDrink drink1 = await getRandomDrink();
+    IndividualDrink drink2 = await getRandomDrink();
+    IndividualDrink drink3 = await getRandomDrink();
+    IndividualDrink drink4 = await getRandomDrink();
+    IndividualDrink drink5 = await getRandomDrink();
+    List<IndividualDrink> drinkList = [drink1, drink2, drink3, drink4, drink5];
+    return drinkList; 
+  }
+
+
+//get random coktail
+//https://www.thecocktaildb.com/api/json/v1/1/random.php
+//drinks[0].idDrink
+//TODO: Refactor getRandomDrink() and getDrinkByID
+  Future<IndividualDrink> getRandomDrink() async {
+    NetworkHelper networkHelper = NetworkHelper('$apiURL/random.php');
+    var data = await networkHelper.getData();
+    String drinkID = data['drinks'][0]['idDrink'];
+    return getByDrinkID(drinkID: drinkID);
+    //drinks[0].idDrink
+  }
 
   //get cocktail list by name specified by user
   Future<dynamic> getByName({String name}) async {
@@ -55,7 +78,7 @@ class CocktailDbAPI {
         ingredientList.add(value);
       if (key.contains('strMeasure') && value != null) measureList.add(value);
     });
-    
+
     while (ingredientList.length > measureList.length) {
       measureList.add('');
     }
