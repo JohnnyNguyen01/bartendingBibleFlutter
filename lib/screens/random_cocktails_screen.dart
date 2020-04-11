@@ -1,5 +1,7 @@
+import 'dart:math';
+
 import 'package:bartender_bible/Components/single_drink_list_view.dart';
-import 'package:bartender_bible/Models/individual_drink.dart';
+import 'package:bartender_bible/Models/drink.dart';
 import 'package:bartender_bible/screens/drink_recipe_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bartender_bible/Util/styles.dart';
@@ -14,11 +16,10 @@ class RandomCocktailScreen extends StatefulWidget {
 class _RandomCocktailScreenState extends State<RandomCocktailScreen> {
   CocktailDbAPI cdbAPI = CocktailDbAPI();
   // create list of drinks
-  Future<List<IndividualDrink>> fiveDrinksList;
 
   @override
   void initState() {
-    fiveDrinksList = cdbAPI.getFiveRandomDrinks();
+    //fiveDrinksList = cdbAPI.getFiveRandomDrinks();
     super.initState();
   }
 
@@ -26,11 +27,12 @@ class _RandomCocktailScreenState extends State<RandomCocktailScreen> {
   @override
   Widget build(BuildContext context) {
     CardController controller; //Use this to trigger swap.
+    double showMeOpacity = 0; //ShowMe Text opacity
+    double noThanksTextOpacity = 0; //noThanks Opacity
 
     return FutureBuilder(
-        future: fiveDrinksList,
-        builder: (BuildContext context,
-            AsyncSnapshot<List<IndividualDrink>> snapshot) {
+        future: cdbAPI.getTenRandomDrinks(),
+        builder: (BuildContext context, AsyncSnapshot<List<Drink>> snapshot) {
           if (snapshot.data == null) {
             return Scaffold(
               body: Center(
@@ -41,59 +43,160 @@ class _RandomCocktailScreenState extends State<RandomCocktailScreen> {
             );
           }
           return Scaffold(
-            body: Center(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.6,
-                child: TinderSwapCard(
-                    orientation: AmassOrientation.BOTTOM,
-                    totalNum: snapshot.data.length,
-                    stackNum: 3,
-                    swipeEdge: 4.0,
-                    maxWidth: MediaQuery.of(context).size.width * 0.9,
-                    maxHeight: MediaQuery.of(context).size.width * 0.9,
-                    minWidth: MediaQuery.of(context).size.width * 0.8,
-                    minHeight: MediaQuery.of(context).size.width * 0.8,
-                    cardBuilder: (context, index) => Card(
-                          child: Stack(
-                            children: <Widget>[
-                              Image.network('${snapshot.data[index].thumbURL}'),
-                              Positioned(
-                                  bottom: 10,
-                                  left: 10,
-                                  child: Text(
-                                    snapshot.data[index].drinkName,
-                                    style: kSingleDrinkCardHeading.copyWith(
-                                        color: Colors.white),
-                                  )),
-                            ],
-                          ), //Image.network('${welcomeImages[index]}'),
-                        ),
-                    cardController: controller = CardController(),
-                    swipeUpdateCallback:
-                        (DragUpdateDetails details, Alignment align) {
-                      /// Get swiping card's alignment
-                      if (align.x < 0) {
-                        //Card is LEFT swiping
-                      } else if (align.x > 0) {
-                        //Card is RIGHT swiping
-                      }
-                    },
-                    swipeCompleteCallback:
-                        (CardSwipeOrientation orientation, int index) {
-                      print(orientation);
-                      if (orientation == CardSwipeOrientation.LEFT) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => IndividualDrinkPage(
-                                    '${snapshot.data[index].drinkID}')));
-                      }
-
-                      /// Get orientation & index of swiped card!
-                    }),
+            body: SafeArea(
+                          child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset('lib/images/bar-app-logo.png', scale: 6),
+                  Text(
+                    'Swipe on a Random Cocktail!',
+                    style: kSingleDrinkCardHeading,
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.6,
+                    child: TinderSwapCard(
+                        orientation: AmassOrientation.BOTTOM,
+                        totalNum: snapshot.data.length,
+                        stackNum: 3,
+                        swipeEdge: 4.0,
+                        maxWidth: MediaQuery.of(context).size.width * 0.9,
+                        maxHeight: MediaQuery.of(context).size.width * 0.9,
+                        minWidth: MediaQuery.of(context).size.width * 0.8,
+                        minHeight: MediaQuery.of(context).size.width * 0.8,
+                        cardBuilder: (context, index) => Card(
+                              child: Stack(
+                                overflow: Overflow.visible,
+                                children: <Widget>[
+                                  Image.network(
+                                      '${snapshot.data[index].drinkThumbURL}'),
+                                  Positioned(
+                                      bottom: 10,
+                                      left: 10,
+                                      child: Text(
+                                        snapshot.data[index].name,
+                                        style: kSingleDrinkCardHeading.copyWith(
+                                            color: Colors.white),
+                                      )),
+                                  ShowMeText(showMeTextOpacity: showMeOpacity),
+                                  NoThanksText(
+                                    noThanksTextOpacity: noThanksTextOpacity,
+                                  ),
+                                ],
+                              ), //Image.network('${welcomeImages[index]}'),
+                            ),
+                        cardController: controller = CardController(),
+                        swipeUpdateCallback:
+                            (DragUpdateDetails details, Alignment align) {
+                          /// Get swiping card's alignment
+                          if (align.x < 0) {
+                            //Card is LEFT swiping
+                            showMeOpacity = 0.0;
+                            noThanksTextOpacity = 1.0;
+                          } else if (align.x > 0) {
+                            //Card is RIGHT swiping
+                            showMeOpacity = 1.0;
+                            noThanksTextOpacity = 0;
+                          } else if (align.x == 0) {
+                            showMeOpacity = 0;
+                            noThanksTextOpacity = 0;
+                          }
+                        },
+                        swipeCompleteCallback:
+                            (CardSwipeOrientation orientation, int index) {
+                          print(orientation);
+                          if (orientation == CardSwipeOrientation.RECOVER) {
+                            showMeOpacity = 0;
+                            noThanksTextOpacity = 0;
+                          }
+                          if (orientation == CardSwipeOrientation.RIGHT) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => IndividualDrinkPage(
+                                        '${snapshot.data[index].drinkID}')));
+                          }
+                        }),
+                  ),
+                  SizedBox(height: 35),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Row(children: <Widget>[
+                            Icon(Icons.arrow_back, color: Colors.red[600], size: 30.0),
+                            Icon(Icons.sentiment_dissatisfied, color: Colors.red[600], size: 30.0),
+                          ]),
+                          Text("    Swipe Left to \n remove Cocktail", style: kIngredientTitleStyle,),
+                        ],
+                      ),
+                      Column(children: <Widget>[
+                        Row(children: <Widget>[
+                          Icon(Icons.sentiment_very_satisfied, color: Colors.green[600], size: 30.0),
+                          Icon(Icons.arrow_forward, color: Colors.green[600], size: 30.0),
+                        ]),
+                        Text('Swipe Right to \n show Cocktail!', style: kIngredientTitleStyle,),
+                      ])
+                    ],
+                  )
+                ],
               ),
             ),
           );
         });
+  }
+}
+
+class ShowMeText extends StatelessWidget {
+  double showMeTextOpacity;
+
+  ShowMeText({this.showMeTextOpacity});
+
+  void setOpacity(double newOpacity) {
+    showMeTextOpacity = newOpacity;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+        top: 5,
+        left: -30,
+        child: Transform.rotate(
+            angle: pi / -4,
+            child: Opacity(
+              opacity: showMeTextOpacity,
+              child: Text(
+                'SHOW ME',
+                style: kSingleDrinkCardHeading.copyWith(
+                    color: Colors.greenAccent, fontSize: 30),
+              ),
+            )));
+  }
+}
+
+class NoThanksText extends StatelessWidget {
+  double noThanksTextOpacity;
+
+  NoThanksText({this.noThanksTextOpacity});
+
+  void setOpacity(double newOpacity) {
+    noThanksTextOpacity = newOpacity;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+        top: 15,
+        right: -30,
+        child: Transform.rotate(
+            angle: pi / 4,
+            child: Opacity(
+              opacity: noThanksTextOpacity,
+              child: Text(
+                'NO THANKS',
+                style: kSingleDrinkCardHeading.copyWith(
+                    color: Colors.red[600], fontSize: 30),
+              ),
+            )));
   }
 }
