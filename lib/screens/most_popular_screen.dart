@@ -1,3 +1,5 @@
+import 'package:bartender_bible/Components/drawer.dart';
+import 'package:bartender_bible/Components/drawer_icon_button.dart';
 import 'package:bartender_bible/Components/single_drink_list_view.dart';
 import 'package:bartender_bible/Models/individual_drink.dart';
 import 'package:bartender_bible/Services/cocktaildb_api.dart';
@@ -14,19 +16,27 @@ class MostPopularScreen extends StatefulWidget {
 class _MostPopularScreenState extends State<MostPopularScreen> {
   CocktailDbAPI cdbAPI = CocktailDbAPI();
   List<IndividualDrink> drinkList;
-
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: AppDrawer(),
       body: SafeArea(
         child: Column(
           children: <Widget>[
             Center(
-              child: TypewriterAnimatedTextKit(
-                text: ['Most Popular Cocktails'],
-                textStyle: kSingleDrinkCardHeading,
-                speed: Duration(milliseconds: 300),
-                totalRepeatCount: 1,
+              child: Row(
+                children: <Widget>[
+                  DrawerIconButton(scaffoldKey: _scaffoldKey),
+                  TypewriterAnimatedTextKit(
+                    text: ['Most Popular Cocktails'],
+                    textStyle: kSingleDrinkCardHeading,
+                    speed: Duration(milliseconds: 300),
+                    totalRepeatCount: 1,
+                  ),
+                ],
               ),
             ),
             Divider(height: 20),
@@ -35,7 +45,8 @@ class _MostPopularScreenState extends State<MostPopularScreen> {
                 builder: (BuildContext buildContext,
                     AsyncSnapshot<List<IndividualDrink>> snapshot) {
                   if (snapshot.data == null) {
-                    return Center(
+                    return Align(
+                      alignment: Alignment.center,
                       child: OrangeCircleIndicator(),
                     );
                   }

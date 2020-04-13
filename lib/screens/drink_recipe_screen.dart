@@ -50,7 +50,7 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                             elevation: 10.0,
                             child: Container(
                               padding: EdgeInsets.only(left: 10, right: 10),
-                              height: 130.0,
+                              height: 160.0,
                               child: Column(
                                 children: <Widget>[
                                   Row(

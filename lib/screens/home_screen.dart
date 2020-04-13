@@ -1,7 +1,9 @@
+import 'package:bartender_bible/Components/drawer_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:bartender_bible/Components/home_page_button.dart';
 import 'package:bartender_bible/Components/rounded_search_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:bartender_bible/Components/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,6 +11,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _scaffoldKey =
+      GlobalKey<ScaffoldState>(); //hacky fix for lack of Scaffold.of(context)
   AssetImage heroImage;
   AssetImage classicsImage;
   AssetImage byAlcoholImage;
@@ -41,6 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: AppDrawer(),
       body: SafeArea(
         top: false,
         child: Column(
@@ -64,9 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 150,
                     height: 150,
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: logo),
+                      image: DecorationImage(fit: BoxFit.cover, image: logo),
                     ),
                   ),
                 ),
@@ -85,6 +89,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 //Search bar card
                 RoundedSearchBar(),
+                //AppDrawer
+                SafeArea(
+                  child: DrawerIconButton(scaffoldKey: _scaffoldKey,),
+                )
               ],
             ),
             SizedBox(height: 39),
@@ -95,12 +103,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomePageButton(
                     title: 'Most Popular',
                     image: allDrinksImage,
-                    onTapFunction: (){Navigator.pushNamed(context, '/MostPopular');},
+                    onTapFunction: () {
+                      Navigator.pushNamed(context, '/MostPopular');
+                    },
                   ),
-                  HomePageButton(
-                      title: 'Favourites',
-                      image:
-                          favouritesImage),
+                  HomePageButton(title: 'Favourites', image: favouritesImage),
                   SizedBox(height: 15),
                   HomePageButton(
                     title: 'Random Cocktails',

@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:bartender_bible/Components/drawer.dart';
+import 'package:bartender_bible/Components/drawer_icon_button.dart';
 import 'package:bartender_bible/Components/single_drink_list_view.dart';
 import 'package:bartender_bible/Models/drink.dart';
 import 'package:bartender_bible/screens/drink_recipe_screen.dart';
@@ -28,12 +30,14 @@ class _RandomCocktailScreenState extends State<RandomCocktailScreen> {
     CardController controller; //Use this to trigger swap.
     double showMeOpacity = 0; //ShowMe Text opacity
     double noThanksTextOpacity = 0; //noThanks Opacity
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
 
     return FutureBuilder(
         future: cdbAPI.getTenRandomDrinks(),
         builder: (BuildContext context, AsyncSnapshot<List<Drink>> snapshot) {
           if (snapshot.data == null) {
             return Scaffold(
+              key: _scaffoldKey,
               body: Center(
                 child: Container(
                   child: OrangeCircleIndicator(),
@@ -42,11 +46,21 @@ class _RandomCocktailScreenState extends State<RandomCocktailScreen> {
             );
           }
           return Scaffold(
+            drawer: AppDrawer(),
+            key: _scaffoldKey,
             body: SafeArea(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('lib/images/bar-app-logo.png', scale: 6),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      DrawerIconButton(scaffoldKey: _scaffoldKey),
+                      Spacer(flex: 3),
+                      Image.asset('lib/images/bar-app-logo.png', scale: 6),
+                      Spacer(flex: 4)
+                    ],
+                  ),
                   Text(
                     'Swipe on a Random Cocktail!',
                     style: kSingleDrinkCardHeading,
