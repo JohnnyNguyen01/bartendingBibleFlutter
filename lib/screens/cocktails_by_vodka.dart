@@ -1,3 +1,5 @@
+import 'package:bartender_bible/Components/drawer.dart';
+import 'package:bartender_bible/Components/drawer_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:bartender_bible/Util/styles.dart';
 import 'package:bartender_bible/Services/cocktaildb_api.dart';
@@ -10,15 +12,14 @@ class VodkaSelectionScreen extends StatefulWidget {
 
 class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     CocktailDbAPI cdbAPI = CocktailDbAPI();
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: AppDrawer(),
       body: Column(
         children: <Widget>[
           Stack(
@@ -52,7 +53,7 @@ class _VodkaSelectionScreenState extends State<VodkaSelectionScreen> {
                   ),
                 ),
               ),
-              //ListView.builder(itemBuilder: null),
+              SafeArea(child: DrawerIconButton(scaffoldKey: _scaffoldKey, iconColor: Colors.white),)
             ],
           ),
           SizedBox(height: 28.0),

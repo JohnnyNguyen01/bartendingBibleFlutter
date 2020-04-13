@@ -29,7 +29,7 @@ class _MostPopularScreenState extends State<MostPopularScreen> {
             Center(
               child: Row(
                 children: <Widget>[
-                  DrawerIconButton(scaffoldKey: _scaffoldKey),
+                  DrawerIconButton(scaffoldKey: _scaffoldKey, iconColor: Colors.black,),
                   TypewriterAnimatedTextKit(
                     text: ['Most Popular Cocktails'],
                     textStyle: kSingleDrinkCardHeading,

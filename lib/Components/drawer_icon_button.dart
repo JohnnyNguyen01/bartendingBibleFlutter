@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class DrawerIconButton extends StatelessWidget {
 
   GlobalKey<ScaffoldState> scaffoldKey;
-
-  DrawerIconButton({ @required this.scaffoldKey});
+  Color iconColor;
+  DrawerIconButton({ @required this.scaffoldKey, @required this.iconColor});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class DrawerIconButton extends StatelessWidget {
       iconSize: 30.0,
       icon: Icon(
         Icons.menu,
-        color: Colors.black,
+        color: iconColor,
       ),
       onPressed: () {scaffoldKey.currentState.openDrawer();},
     );

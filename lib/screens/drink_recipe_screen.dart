@@ -1,3 +1,5 @@
+import 'package:bartender_bible/Components/drawer.dart';
+import 'package:bartender_bible/Components/drawer_icon_button.dart';
 import 'package:bartender_bible/Components/favourtie_button.dart';
 import 'package:bartender_bible/Models/individual_drink.dart';
 import 'package:bartender_bible/Services/cocktaildb_api.dart';
@@ -14,6 +16,7 @@ class IndividualDrinkPage extends StatefulWidget {
 class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
   CocktailDbAPI cdbAPI = CocktailDbAPI();
   IndividualDrink drink;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   /* for Future Builder: Future returned is type IndividualDrink */
   @override
@@ -24,6 +27,8 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
             (BuildContext context, AsyncSnapshot<IndividualDrink> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
+              key: _scaffoldKey,
+              drawer: AppDrawer(),
               body: SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
                 child: Column(
@@ -41,7 +46,6 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                             ),
                           ),
                         ),
-
                         Positioned(
                           left: 80,
                           right: 80,
@@ -55,7 +59,11 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                                 children: <Widget>[
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
-                                    children: <Widget>[FavouriteButton(drinkName: snapshot.data.drinkName,)],
+                                    children: <Widget>[
+                                      FavouriteButton(
+                                        drinkName: snapshot.data.drinkName,
+                                      )
+                                    ],
                                   ),
                                   SizedBox(height: 8.0),
                                   Text(snapshot.data.alcoholic),
@@ -74,8 +82,10 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                             ),
                           ),
                         ),
-
-                        //ListView.builder(itemBuilder: null),
+                        SafeArea(
+                            child: DrawerIconButton(
+                                scaffoldKey: _scaffoldKey,
+                                iconColor: Colors.black)),
                       ],
                     ),
                     SizedBox(height: 95.0),

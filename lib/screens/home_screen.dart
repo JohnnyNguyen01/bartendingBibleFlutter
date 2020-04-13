@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 RoundedSearchBar(),
                 //AppDrawer
                 SafeArea(
-                  child: DrawerIconButton(scaffoldKey: _scaffoldKey,),
+                  child: DrawerIconButton(scaffoldKey: _scaffoldKey, iconColor: Colors.black,),
                 )
               ],
             ),

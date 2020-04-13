@@ -55,7 +55,7 @@ class _RandomCocktailScreenState extends State<RandomCocktailScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      DrawerIconButton(scaffoldKey: _scaffoldKey),
+                      DrawerIconButton(scaffoldKey: _scaffoldKey, iconColor: Colors.black,),
                       Spacer(flex: 3),
                       Image.asset('lib/images/bar-app-logo.png', scale: 6),
                       Spacer(flex: 4)

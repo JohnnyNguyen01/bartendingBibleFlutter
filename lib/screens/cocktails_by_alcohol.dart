@@ -1,3 +1,5 @@
+import 'package:bartender_bible/Components/drawer.dart';
+import 'package:bartender_bible/Components/drawer_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:bartender_bible/Util/styles.dart';
 import 'package:bartender_bible/Models/alcohol_type.dart';
@@ -11,7 +13,7 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
   ScrollController _scrollController = ScrollController();
   AlcoholType _alcoholType = AlcoholType();
   AssetImage heroImage;
-  
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -36,6 +38,8 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: AppDrawer(),
       body: Column(
         //crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -69,7 +73,7 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
                   ),
                 ),
               ),
-              //ListView.builder(itemBuilder: null),
+              SafeArea(child: DrawerIconButton(scaffoldKey: _scaffoldKey, iconColor: Colors.white,)),
             ],
           ),
           SizedBox(height: 30.0),
@@ -94,12 +98,14 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
                           Navigator.pushNamed(context, switchScreens(index));
                         },
                         leading: CircleAvatar(
-                          backgroundImage: _alcoholType.getTypeList()[index].getImage(),
+                          backgroundImage:
+                              _alcoholType.getTypeList()[index].getImage(),
                           radius: 30.0,
                         ),
                         title: Text(_alcoholType.getTypeList()[index].getName(),
                             style: kShowAllBtnStyle),
-                        subtitle: Text(_alcoholType.getTypeList()[index].getDescription()),
+                        subtitle: Text(
+                            _alcoholType.getTypeList()[index].getDescription()),
                         isThreeLine: true,
                       ),
                     ),
@@ -111,16 +117,30 @@ class _CocktailsByAlcoholState extends State<CocktailsByAlcohol> {
     );
   }
 
-  String switchScreens(int index){
-    switch(index){
-      case 0: return '/VodkaCocktails'; break;
-      case 1: return '/GinCocktails'; break;
-      case 2: return '/TequilaCocktails'; break;
-      case 3: return '/RumCocktails'; break;
-      case 4: return '/WhiskyCocktails'; break;
-      case 5: return '/BrandyCocktails'; break;
+  String switchScreens(int index) {
+    switch (index) {
+      case 0:
+        return '/VodkaCocktails';
+        break;
+      case 1:
+        return '/GinCocktails';
+        break;
+      case 2:
+        return '/TequilaCocktails';
+        break;
+      case 3:
+        return '/RumCocktails';
+        break;
+      case 4:
+        return '/WhiskyCocktails';
+        break;
+      case 5:
+        return '/BrandyCocktails';
+        break;
 
-      default : return '/'; break;
+      default:
+        return '/';
+        break;
     }
   }
 }

@@ -6,31 +6,43 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(padding: EdgeInsets.zero, children: <Widget>[
-        DrawerHeader(
-          child: Text('This is the drawer'),
-        ),
-        DrawerListTile(title: 'Home', onTapFunction: () => Navigator.pushNamed(context, '/'),),
-        DrawerListTile(
-            title: 'Most Popular',
-            onTapFunction: () => Navigator.pushNamed(context, '/MostPopular')),
-        DrawerListTile(title: 'Favourites'),
-        DrawerListTile(
-          title: 'Random Cocktails',
-          onTapFunction: () => Navigator.pushNamed(context, '/RandomCocktails'),
-        ),
-        DrawerListTile(
-          title: 'Cocktails by Alcohol',
-          onTapFunction: () =>
-              Navigator.pushNamed(context, '/CocktailsByAlcohol'),
-        ),
-        DrawerListTile(title: 'All Cocktails'),
-        DrawerListTile(
-          title: 'About',
-          onTapFunction: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AboutScreen())),
-        )
-      ]),
+      child: SafeArea(
+        child: ListView(padding: EdgeInsets.zero, children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('lib/images/bar-app-logo.png')),
+              color: Colors.black,
+            ),
+            child: null,
+          ),
+          DrawerListTile(
+            title: 'Home',
+            onTapFunction: () => Navigator.pushNamed(context, '/'),
+          ),
+          DrawerListTile(
+              title: 'Most Popular',
+              onTapFunction: () =>
+                  Navigator.pushNamed(context, '/MostPopular')),
+          DrawerListTile(title: 'Favourites'),
+          DrawerListTile(
+            title: 'Random Cocktails',
+            onTapFunction: () =>
+                Navigator.pushNamed(context, '/RandomCocktails'),
+          ),
+          DrawerListTile(
+            title: 'Cocktails by Alcohol',
+            onTapFunction: () =>
+                Navigator.pushNamed(context, '/CocktailsByAlcohol'),
+          ),
+          DrawerListTile(title: 'All Cocktails'),
+          DrawerListTile(
+            title: 'About',
+            onTapFunction: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AboutScreen())),
+          )
+        ]),
+      ),
     );
   }
 }
