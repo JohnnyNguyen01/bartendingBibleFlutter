@@ -3,6 +3,7 @@ import 'package:bartender_bible/screens/cocktails_by_gin_screen.dart';
 import 'package:bartender_bible/screens/cocktails_rum.dart';
 import 'package:bartender_bible/screens/cocktails_tequila_screen.dart';
 import 'package:bartender_bible/screens/cocktails_whisky_screen.dart';
+import 'screens/most_popular_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/random_cocktails_screen.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/RumCocktails': (context) => RumSelectionScreen(),
         '/WhiskyCocktails': (context) => WhiskySelectionScreen(),
         '/BrandyCocktails': (context) => BrandySelectionScreen(),
+        '/MostPopular': (context) => MostPopularScreen(),
       },
     );
   }

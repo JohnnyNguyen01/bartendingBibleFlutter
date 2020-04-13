@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "995893796717",
+    "firebase_url": "https://bartenderbible-38173.firebaseio.com",
+    "project_id": "bartenderbible-38173",
+    "storage_bucket": "bartenderbible-38173.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995893796717:android:6b0e4f459e9aef9fc08464",
+        "android_client_info": {
+          "package_name": "com.johnnynguyen.bartender_bible"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "995893796717-cgiugut69a6e9b3vs8p1bt519e1uumpl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADoKpEl1mrhdmbSKURRULBrR33jN51yk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995893796717-cgiugut69a6e9b3vs8p1bt519e1uumpl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

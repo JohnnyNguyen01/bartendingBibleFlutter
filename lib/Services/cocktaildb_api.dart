@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bartender_bible/Models/drink.dart';
 import 'package:bartender_bible/Models/individual_drink.dart';
 import 'package:bartender_bible/Services/networking.dart';
@@ -7,6 +9,8 @@ const apiKey = '9973533';
 const apiURL = 'https://www.thecocktaildb.com/api/json/v2/$apiKey';
 
 class CocktailDbAPI {
+
+
 //https://www.thecocktaildb.com/api/json/v2/9973533/randomselection.php
   Future<List<Drink>> getTenRandomDrinks() async {
     List<Drink> drinkList = [];
@@ -22,15 +26,11 @@ class CocktailDbAPI {
     return drinkList;
   }
 
-//https://www.thecocktaildb.com/api/json/v1/1/random.php
-//drinks[0].idDrink
-
   Future<IndividualDrink> getRandomDrink() async {
     NetworkHelper networkHelper = NetworkHelper('$apiURL/random.php');
     var data = await networkHelper.getData();
     String drinkID = data['drinks'][0]['idDrink'];
     return getByDrinkID(drinkID: drinkID);
-    //drinks[0].idDrink
   }
 
   //get cocktail list by name specified by user
@@ -84,7 +84,6 @@ class CocktailDbAPI {
   }
 
   //get indivudial cocktail by cocktail-ID
-  //https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
   Future<IndividualDrink> getByDrinkID({String drinkID}) async {
     NetworkHelper networkhelper =
         NetworkHelper('$apiURL/lookup.php?i=$drinkID');
@@ -126,5 +125,44 @@ class CocktailDbAPI {
   Image getIngredientImage({String imageName}) {
     return Image.network(
         'https://www.thecocktaildb.com/images/ingredients/${imageName.toLowerCase()}-Small.png');
+  }
+
+  //TODO: Refactor Individual Drink mapping 
+  //get most popular drinks
+  Future<List<IndividualDrink>> getMostPopular() async {
+    NetworkHelper networkHelper = NetworkHelper('$apiURL/popular.php');
+    var data = await networkHelper.getData();
+    var jsonList = data['drinks'];
+    List<IndividualDrink> drinkList = [];
+
+    for (var drinkIndex in jsonList){
+      List<String> ingredientList = [];
+      List<String> measureList = [];
+
+    Map parsedMap = drinkIndex;
+    parsedMap.forEach((key, value) {
+      if (key.contains('strIngredient') && value != null)
+        ingredientList.add(value);
+      if (key.contains('strMeasure') && value != null) measureList.add(value);
+    });
+
+    while (ingredientList.length > measureList.length) {
+      measureList.add('');
+    }
+    IndividualDrink drink = IndividualDrink(
+        drinkID: drinkIndex['idDrink'],
+        drinkName: drinkIndex['strDrink'],
+        tags: drinkIndex['strTags'],
+        category: drinkIndex['strCategory'],
+        iba: drinkIndex['strIBA'],
+        alcoholic: drinkIndex['strAlcoholic'],
+        glassType: drinkIndex['strGlass'],
+        instructionsEng: drinkIndex['strInstructions'],
+        thumbURL: drinkIndex['strDrinkThumb'],
+        ingredients: ingredientList,
+        measurements: measureList);
+        drinkList.add(drink);
+    }
+    return drinkList;
   }
 }

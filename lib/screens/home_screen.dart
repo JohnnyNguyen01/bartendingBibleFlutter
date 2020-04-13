@@ -93,6 +93,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.only(left: 8, right: 8),
                 children: <Widget>[
                   HomePageButton(
+                    title: 'Most Popular',
+                    image: allDrinksImage,
+                    onTapFunction: (){Navigator.pushNamed(context, '/MostPopular');},
+                  ),
+                  HomePageButton(
                       title: 'Favourites',
                       image:
                           favouritesImage),
