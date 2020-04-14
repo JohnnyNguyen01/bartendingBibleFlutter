@@ -83,11 +83,11 @@ class CocktailDbAPI {
       'y': 'y',
       'z': 'z',
     };
-    alphabet.forEach((k, v) async {
-      var tempLetterDrinkList = await getByFirstLetter(letter: v);
+    for (var letter in alphabet.entries) {
+      List<Drink> tempLetterDrinkList =
+          await getByFirstLetter(letter: letter.value);
       drinkList.addAll(tempLetterDrinkList);
-    });
-    print('size of all Drinks List is: ${drinkList.length}');
+    }
     return drinkList;
   }
 
@@ -97,12 +97,14 @@ class CocktailDbAPI {
     var data = await networkHelper.getData();
     List<Drink> drinkList = [];
 
-    for (var object in data['drinks']) {
-      Drink drink = Drink(
-          drinkID: object['idDrink'],
-          name: object['strDrink'],
-          drinkThumbURL: object['strDrinkThumb']);
-      drinkList.add(drink);
+    if (data['drinks'] != null) {
+      for (var object in data['drinks']) {
+        Drink drink = Drink(
+            drinkID: object['idDrink'],
+            name: object['strDrink'],
+            drinkThumbURL: object['strDrinkThumb']);
+        drinkList.add(drink);
+      }
     }
     return drinkList;
   }
