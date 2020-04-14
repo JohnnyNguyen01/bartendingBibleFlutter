@@ -98,8 +98,8 @@ class _AllDrinksScreenState extends State<AllDrinksScreen> {
                             height: (MediaQuery.of(context).size.height / 2.8),
                           ),
                           Text(
-                            'Please wait a few seconds',
-                            style: kRegularTextStyle,
+                            'Too many drinks, please give me a few seconds 😰😰	',
+                            style: kRegularTextStyle.copyWith(fontSize: 14.0),
                           ),
                           SizedBox(height: 15.0),
                           OrangeCircleIndicator(),
