@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bartender_bible/screens/search_results_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
 
 class RoundedSearchBar extends StatefulWidget {
   @override
@@ -7,8 +9,8 @@ class RoundedSearchBar extends StatefulWidget {
 }
 
 class _RoundedSearchBarState extends State<RoundedSearchBar> {
-  String _input;
-
+  var parser = EmojiParser();
+  
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -21,7 +23,14 @@ class _RoundedSearchBarState extends State<RoundedSearchBar> {
           width: 300,
           child: TextField(
             onSubmitted: (value) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResultScreen(searchTerm: value)));
+              if (value.isEmpty || value == null) {
+                Fluttertoast.showToast(msg: 'Please enter a letter...or word 😤');
+              } else
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            SearchResultScreen(searchTerm: value)));
             },
             decoration: InputDecoration(
                 icon: Icon(Icons.search),

@@ -21,6 +21,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       searchResult = cdbAPI.getByName(name: widget.searchTerm);
     } else if (widget.searchTerm.length == 1) {
       searchResult = cdbAPI.getByFirstLetter(letter: widget.searchTerm);
+    } else if (widget.searchTerm == null){
+      searchResult = cdbAPI.getByFirstLetter(letter: ' ');
     }
   }
 
@@ -33,7 +35,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(),
       body: SafeArea(
         child: Column(
           children: <Widget>[
