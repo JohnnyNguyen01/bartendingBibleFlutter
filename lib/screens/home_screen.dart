@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomePageButton(
                     title: 'All Cocktails',
                     image: allDrinksImage,
-                    onTapFunction: () {},
+                    onTapFunction: () => Navigator.pushNamed(context, '/AllDrinks'),
                   ),
                 ],
               ),

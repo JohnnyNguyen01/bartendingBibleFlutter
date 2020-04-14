@@ -35,7 +35,10 @@ class AppDrawer extends StatelessWidget {
             onTapFunction: () =>
                 Navigator.pushNamed(context, '/CocktailsByAlcohol'),
           ),
-          DrawerListTile(title: 'All Cocktails'),
+          DrawerListTile(
+            title: 'All Cocktails',
+            onTapFunction: () => Navigator.pushNamed(context, '/AllDrinks'),
+          ),
           DrawerListTile(
             title: 'About',
             onTapFunction: () => Navigator.push(context,

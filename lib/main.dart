@@ -1,3 +1,4 @@
+import 'package:bartender_bible/screens/all_drinks_screen.dart';
 import 'package:bartender_bible/screens/cocktails_brandy_screen.dart';
 import 'package:bartender_bible/screens/cocktails_by_gin_screen.dart';
 import 'package:bartender_bible/screens/cocktails_rum.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/WhiskyCocktails': (context) => WhiskySelectionScreen(),
         '/BrandyCocktails': (context) => BrandySelectionScreen(),
         '/MostPopular': (context) => MostPopularScreen(),
+        '/AllDrinks': (context) => AllDrinksScreen(),
       },
     );
   }

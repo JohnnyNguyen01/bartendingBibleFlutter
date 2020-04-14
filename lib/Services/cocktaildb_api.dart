@@ -9,8 +9,6 @@ const apiKey = '9973533';
 const apiURL = 'https://www.thecocktaildb.com/api/json/v2/$apiKey';
 
 class CocktailDbAPI {
-
-
 //https://www.thecocktaildb.com/api/json/v2/9973533/randomselection.php
   Future<List<Drink>> getTenRandomDrinks() async {
     List<Drink> drinkList = [];
@@ -48,6 +46,49 @@ class CocktailDbAPI {
       }
       return drinkList;
     } else if (data['drinks'] == null) return null;
+  }
+
+  /*
+   * Get all Drinks
+   * Super tacky?
+   * 
+   */
+  Future<List<Drink>> getAllDrinks() async {
+    List<Drink> drinkList = [];
+    Map alphabet = {
+      'a': 'a',
+      'b': 'b',
+      'c': 'c',
+      'd': 'd',
+      'e': 'e',
+      'f': 'f',
+      'g': 'g',
+      'h': 'h',
+      'i': 'i',
+      'j': 'j',
+      'k': 'k',
+      'l': 'l',
+      'm': 'm',
+      'n': 'n',
+      'o': 'o',
+      'p': 'p',
+      'q': 'q',
+      'r': 'r',
+      's': 's',
+      't': 't',
+      'u': 'u',
+      'v': 'v',
+      'w': 'w',
+      'x': 'x',
+      'y': 'y',
+      'z': 'z',
+    };
+    alphabet.forEach((k, v) async {
+      var tempLetterDrinkList = await getByFirstLetter(letter: v);
+      drinkList.addAll(tempLetterDrinkList);
+    });
+    print('size of all Drinks List is: ${drinkList.length}');
+    return drinkList;
   }
 
   //search cocktail by First Letter
@@ -127,7 +168,7 @@ class CocktailDbAPI {
         'https://www.thecocktaildb.com/images/ingredients/${imageName.toLowerCase()}-Small.png');
   }
 
-  //TODO: Refactor Individual Drink mapping 
+  //TODO: Refactor Individual Drink mapping
   //get most popular drinks
   Future<List<IndividualDrink>> getMostPopular() async {
     NetworkHelper networkHelper = NetworkHelper('$apiURL/popular.php');
@@ -135,33 +176,33 @@ class CocktailDbAPI {
     var jsonList = data['drinks'];
     List<IndividualDrink> drinkList = [];
 
-    for (var drinkIndex in jsonList){
+    for (var drinkIndex in jsonList) {
       List<String> ingredientList = [];
       List<String> measureList = [];
 
-    Map parsedMap = drinkIndex;
-    parsedMap.forEach((key, value) {
-      if (key.contains('strIngredient') && value != null)
-        ingredientList.add(value);
-      if (key.contains('strMeasure') && value != null) measureList.add(value);
-    });
+      Map parsedMap = drinkIndex;
+      parsedMap.forEach((key, value) {
+        if (key.contains('strIngredient') && value != null)
+          ingredientList.add(value);
+        if (key.contains('strMeasure') && value != null) measureList.add(value);
+      });
 
-    while (ingredientList.length > measureList.length) {
-      measureList.add('');
-    }
-    IndividualDrink drink = IndividualDrink(
-        drinkID: drinkIndex['idDrink'],
-        drinkName: drinkIndex['strDrink'],
-        tags: drinkIndex['strTags'],
-        category: drinkIndex['strCategory'],
-        iba: drinkIndex['strIBA'],
-        alcoholic: drinkIndex['strAlcoholic'],
-        glassType: drinkIndex['strGlass'],
-        instructionsEng: drinkIndex['strInstructions'],
-        thumbURL: drinkIndex['strDrinkThumb'],
-        ingredients: ingredientList,
-        measurements: measureList);
-        drinkList.add(drink);
+      while (ingredientList.length > measureList.length) {
+        measureList.add('');
+      }
+      IndividualDrink drink = IndividualDrink(
+          drinkID: drinkIndex['idDrink'],
+          drinkName: drinkIndex['strDrink'],
+          tags: drinkIndex['strTags'],
+          category: drinkIndex['strCategory'],
+          iba: drinkIndex['strIBA'],
+          alcoholic: drinkIndex['strAlcoholic'],
+          glassType: drinkIndex['strGlass'],
+          instructionsEng: drinkIndex['strInstructions'],
+          thumbURL: drinkIndex['strDrinkThumb'],
+          ingredients: ingredientList,
+          measurements: measureList);
+      drinkList.add(drink);
     }
     return drinkList;
   }
