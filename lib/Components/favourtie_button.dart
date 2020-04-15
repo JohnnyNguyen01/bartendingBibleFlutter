@@ -30,7 +30,6 @@ class _FavouriteButtonState extends State<FavouriteButton> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setButtonState();
   }

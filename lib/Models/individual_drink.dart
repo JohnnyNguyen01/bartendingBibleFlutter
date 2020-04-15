@@ -1,3 +1,5 @@
+import 'drink.dart';
+
 class IndividualDrink {
   final String drinkID;
   final String drinkName;
@@ -23,5 +25,9 @@ class IndividualDrink {
       this.thumbURL,
       this.ingredients,
       this.measurements});
+
+  Drink toDrink(){
+    return Drink(drinkID: int.parse(drinkID), name: drinkName, drinkThumbURL: thumbURL);
+  }
 
 }

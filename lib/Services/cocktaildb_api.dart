@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:bartender_bible/Models/drink.dart';
 import 'package:bartender_bible/Models/individual_drink.dart';
 import 'package:bartender_bible/Services/networking.dart';
@@ -16,7 +14,7 @@ class CocktailDbAPI {
     var data = await networkHelper.getData();
     for (var individualDrink in data['drinks']) {
       Drink drink = Drink(
-          drinkID: individualDrink['idDrink'],
+          drinkID: int.parse(individualDrink['idDrink']),
           drinkThumbURL: individualDrink['strDrinkThumb'],
           name: individualDrink['strDrink']);
       drinkList.add(drink);
@@ -100,7 +98,7 @@ class CocktailDbAPI {
     if (data['drinks'] != null) {
       for (var object in data['drinks']) {
         Drink drink = Drink(
-            drinkID: object['idDrink'],
+            drinkID: int.parse(object['idDrink']),
             name: object['strDrink'],
             drinkThumbURL: object['strDrinkThumb']);
         drinkList.add(drink);
@@ -170,7 +168,6 @@ class CocktailDbAPI {
         'https://www.thecocktaildb.com/images/ingredients/${imageName.toLowerCase()}-Small.png');
   }
 
-  //TODO: Refactor Individual Drink mapping
   //get most popular drinks
   Future<List<IndividualDrink>> getMostPopular() async {
     NetworkHelper networkHelper = NetworkHelper('$apiURL/popular.php');

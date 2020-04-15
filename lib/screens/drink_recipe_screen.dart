@@ -62,6 +62,7 @@ class _IndividualDrinkPageState extends State<IndividualDrinkPage> {
                                     children: <Widget>[
                                       FavouriteButton(
                                         drinkName: snapshot.data.drinkName,
+                                        drink: snapshot.data.toDrink(),
                                       )
                                     ],
                                   ),

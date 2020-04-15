@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class DrawerIconButton extends StatelessWidget {
 
-  GlobalKey<ScaffoldState> scaffoldKey;
-  Color iconColor;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final Color iconColor;
   DrawerIconButton({ @required this.scaffoldKey, @required this.iconColor});
 
   @override

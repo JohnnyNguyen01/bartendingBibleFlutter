@@ -24,7 +24,7 @@ class AppDrawer extends StatelessWidget {
               title: 'Most Popular',
               onTapFunction: () =>
                   Navigator.pushNamed(context, '/MostPopular')),
-          DrawerListTile(title: 'Favourites'),
+          DrawerListTile(title: 'Favourites', onTapFunction: () => Navigator.pushNamed(context, '/Favourites'),),
           DrawerListTile(
             title: 'Random Cocktails',
             onTapFunction: () =>
@@ -50,15 +50,6 @@ class AppDrawer extends StatelessWidget {
   }
 }
 
-//TODO: add List tiles for pages
-/*
-  Most Popular
-  Favourites
-  Random
-  By Alcohol
-  Show all
-  About [create page -> credit UnSplash people]
- */
 class DrawerListTile extends StatelessWidget {
   final String title;
   final Function onTapFunction;
