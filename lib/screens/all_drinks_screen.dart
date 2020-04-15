@@ -84,7 +84,7 @@ class _AllDrinksScreenState extends State<AllDrinksScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => IndividualDrinkPage(
-                                      snapshot.data[index].drinkID))),
+                                      snapshot.data[index].drinkID.toString()))),
                         ),
                       ),
                     );

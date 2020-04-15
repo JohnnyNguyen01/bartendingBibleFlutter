@@ -49,6 +49,7 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
             ));
           }
           return ListView.builder(
+            controller: widget.scrollController,
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
               return Column(
@@ -82,6 +83,7 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
                     trailing: GestureDetector(
                       child: FavouriteButton(
                         drinkName: snapshot.data[index].name,
+                        drink: snapshot.data[index],
                       ),
                       onTap: () {},
                     ),

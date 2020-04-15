@@ -91,7 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 RoundedSearchBar(),
                 //AppDrawer
                 SafeArea(
-                  child: DrawerIconButton(scaffoldKey: _scaffoldKey, iconColor: Colors.black,),
+                  child: DrawerIconButton(
+                    scaffoldKey: _scaffoldKey,
+                    iconColor: Colors.black,
+                  ),
                 )
               ],
             ),
@@ -107,7 +110,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.pushNamed(context, '/MostPopular');
                     },
                   ),
-                  HomePageButton(title: 'Favourites', image: favouritesImage),
+                  HomePageButton(
+                    title: 'Favourites',
+                    image: favouritesImage,
+                    onTapFunction: () =>
+                        Navigator.pushNamed(context, '/Favourites'),
+                  ),
                   SizedBox(height: 15),
                   HomePageButton(
                     title: 'Random Cocktails',
@@ -128,7 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomePageButton(
                     title: 'All Cocktails',
                     image: allDrinksImage,
-                    onTapFunction: () => Navigator.pushNamed(context, '/AllDrinks'),
+                    onTapFunction: () =>
+                        Navigator.pushNamed(context, '/AllDrinks'),
                   ),
                 ],
               ),
