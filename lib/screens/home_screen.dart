@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   AssetImage favouritesImage;
   AssetImage allDrinksImage;
   AssetImage logo;
+  AssetImage mostPopularImage;
 
   @override
   void initState() {
@@ -27,7 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
     classicsImage = AssetImage('lib/images/brooke-lark-unsplash.png');
     favouritesImage = AssetImage('lib/images/Spencer-Davis-unsplash.jpg');
     byAlcoholImage = AssetImage('lib/images/john-cafazza-unsplash.jpg');
-    allDrinksImage = AssetImage('lib/images/johann-trasch-unsplash.jpg');
+    allDrinksImage = AssetImage('lib/images/kelly-sikkema-unsplash.jpg');
+    mostPopularImage = AssetImage('lib/images/johann-trasch-unsplash.jpg');
     logo = AssetImage('lib/images/bar-app-logo.png');
   }
 
@@ -105,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   HomePageButton(
                     title: 'Most Popular',
-                    image: allDrinksImage,
+                    image: mostPopularImage,
                     onTapFunction: () {
                       Navigator.pushNamed(context, '/MostPopular');
                     },
