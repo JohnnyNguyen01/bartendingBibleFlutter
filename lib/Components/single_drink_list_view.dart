@@ -63,7 +63,7 @@ class _SingleDrinkLVState extends State<SingleDrinkLV> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => IndividualDrinkPage(
-                                  snapshot.data[index].drinkID)));
+                                  snapshot.data[index].drinkID.toString())));
                     },
                     title: Text(
                       snapshot.data[index].name,
