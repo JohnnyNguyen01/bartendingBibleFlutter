@@ -5,6 +5,7 @@ import 'package:bartender_bible/screens/cocktails_rum.dart';
 import 'package:bartender_bible/screens/cocktails_tequila_screen.dart';
 import 'package:bartender_bible/screens/cocktails_whisky_screen.dart';
 import 'package:bartender_bible/screens/favourites_screen.dart';
+import 'package:bartender_bible/screens/video_tutorials_screen.dart';
 import 'screens/most_popular_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/MostPopular': (context) => MostPopularScreen(),
         '/AllDrinks': (context) => AllDrinksScreen(),
         '/Favourites': (context) => FavouritesScreen(),
+        '/VideoTutorials' : (context) => VideoTutorialsScreen(),
       },
     );
   }

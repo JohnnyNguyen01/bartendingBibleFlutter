@@ -37,7 +37,7 @@ class CocktailDbAPI {
     if (data['drinks'] != null) {
       for (var object in data['drinks']) {
         Drink drink = Drink(
-            drinkID: object['idDrink'],
+            drinkID: int.parse(object['idDrink']) ,
             name: object['strDrink'],
             drinkThumbURL: object['strDrinkThumb']);
         drinkList.add(drink);

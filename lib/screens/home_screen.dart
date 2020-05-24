@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   AssetImage allDrinksImage;
   AssetImage logo;
   AssetImage mostPopularImage;
+  AssetImage videoTutorials;
 
   @override
   void initState() {
@@ -31,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     allDrinksImage = AssetImage('lib/images/kelly-sikkema-unsplash.jpg');
     mostPopularImage = AssetImage('lib/images/johann-trasch-unsplash.jpg');
     logo = AssetImage('lib/images/bar-app-logo.png');
+    videoTutorials = AssetImage('lib/images/ivan-cortez-unsplash.jpg');
   }
 
   @override
@@ -42,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     precacheImage(byAlcoholImage, context);
     precacheImage(allDrinksImage, context);
     precacheImage(logo, context);
+    precacheImage(videoTutorials, context);
   }
 
   @override
@@ -105,6 +108,11 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView(
                 padding: EdgeInsets.only(left: 8, right: 8),
                 children: <Widget>[
+                  HomePageButton(
+                    title: 'Video Tutorials',
+                    image: videoTutorials,
+                    onTapFunction: () => Navigator.pushNamed(context, '/VideoTutorials'),
+                  ),
                   HomePageButton(
                     title: 'Most Popular',
                     image: mostPopularImage,

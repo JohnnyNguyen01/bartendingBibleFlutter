@@ -31,7 +31,7 @@ class DBProvider {
           ")");
     });
   }
-
+  //add new drink
   newDrink(Drink newDrink) async {
     final db = await database;
     var res = await db.insert("Drink", newDrink.toMap());
